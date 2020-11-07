@@ -72,6 +72,7 @@ class MovieFragment : Fragment() {
     //Metode Item yang dipilih
     private fun showSelectedMovie(movie: Main) {
         Toast.makeText(activity, "Kamu memilih ${movie.title}", Toast.LENGTH_SHORT).show()
-        view?.findNavController()?.navigate(R.id.action_movieFragment_to_detailActivity)
+        //Tidak bisa menggunakan Navigation
+//        view?.findNavController()?.navigate(R.id.action_movieFragment_to_detailActivity)
     }
 }
