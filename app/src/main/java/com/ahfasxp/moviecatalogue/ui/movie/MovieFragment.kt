@@ -1,5 +1,6 @@
 package com.ahfasxp.moviecatalogue.ui.movie
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -12,6 +13,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.ahfasxp.moviecatalogue.R
 import com.ahfasxp.moviecatalogue.data.Main
+import com.ahfasxp.moviecatalogue.ui.detail.DetailActivity
 import com.ahfasxp.moviecatalogue.ui.main.MainAdapter
 import kotlinx.android.synthetic.main.fragment_movie.*
 
@@ -69,10 +71,14 @@ class MovieFragment : Fragment() {
         }
     }
 
-    //Metode Item yang dipilih
+    //Metode item yang dipilih
     private fun showSelectedMovie(movie: Main) {
         Toast.makeText(activity, "Kamu memilih ${movie.title}", Toast.LENGTH_SHORT).show()
         //Tidak bisa menggunakan Navigation
 //        view?.findNavController()?.navigate(R.id.action_movieFragment_to_detailActivity)
+        val intent = Intent(activity, DetailActivity::class.java)
+        intent.putExtra(DetailActivity.EXTRA_ID, movie.id)
+        intent.putExtra(DetailActivity.EXTRA_TYPE, "movie")
+        startActivity(intent)
     }
 }

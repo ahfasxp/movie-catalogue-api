@@ -1,14 +1,18 @@
 package com.ahfasxp.moviecatalogue.ui.tvShow
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.ahfasxp.moviecatalogue.R
+import com.ahfasxp.moviecatalogue.data.Main
+import com.ahfasxp.moviecatalogue.ui.detail.DetailActivity
 import com.ahfasxp.moviecatalogue.ui.main.MainAdapter
 import kotlinx.android.synthetic.main.fragment_show.*
 import kotlinx.android.synthetic.main.fragment_show.progressBar
@@ -38,6 +42,11 @@ class ShowFragment : Fragment() {
         adapter.notifyDataSetChanged()
         rv_show.layoutManager = GridLayoutManager(activity, 2)
         rv_show.adapter = adapter
+        adapter.setOnItemClickCallback(object : MainAdapter.OnItemClickCallback {
+            override fun onItemClicked(data: Main) {
+                showSelectedShow(data)
+            }
+        })
 
         //Menginisialisasi ShowViewModel
         showViewModel = ViewModelProvider(
@@ -61,5 +70,16 @@ class ShowFragment : Fragment() {
         } else {
             progressBar.visibility = View.GONE
         }
+    }
+
+    //Metode item yang dipilih
+    private fun showSelectedShow(show: Main) {
+        Toast.makeText(activity, "Kamu memilih ${show.title}", Toast.LENGTH_SHORT).show()
+        //Tidak bisa menggunakan Navigation
+//        view?.findNavController()?.navigate(R.id.action_movieFragment_to_detailActivity)
+        val intent = Intent(activity, DetailActivity::class.java)
+        intent.putExtra(DetailActivity.EXTRA_ID, show.id)
+        intent.putExtra(DetailActivity.EXTRA_TYPE, "show")
+        startActivity(intent)
     }
 }
