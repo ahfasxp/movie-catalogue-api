@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ahfasxp.moviecatalogue.R
-import com.ahfasxp.moviecatalogue.data.Main
+import com.ahfasxp.moviecatalogue.data.MainEntity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.list_items.view.*
@@ -17,11 +17,12 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
         this.onItemClickCallback = onItemClickCallback
     }
 
-    private val mData = ArrayList<Main>()
+    private var mData = ArrayList<MainEntity>()
 
-    fun setData(items: ArrayList<Main>) {
-        mData.clear()
-        mData.addAll(items)
+    fun setData(items: List<MainEntity>?) {
+        if (items == null) return
+        this.mData.clear()
+        this.mData.addAll(items)
         notifyDataSetChanged()
     }
 
@@ -40,10 +41,10 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
     override fun getItemCount(): Int = mData.size
 
     inner class MainViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(main: Main) {
+        fun bind(main: MainEntity) {
             with(itemView) {
                 Glide.with(itemView.context)
-                    .load("https://image.tmdb.org/t/p/w500${main.poster_path}")
+                    .load(main.poster_path)
                     .apply(RequestOptions().override(350, 550))
                     .into(img_poster)
                 tv_title.text = main.title
@@ -54,6 +55,6 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
     }
 
     interface OnItemClickCallback {
-        fun onItemClicked(data: Main)
+        fun onItemClicked(data: MainEntity)
     }
 }

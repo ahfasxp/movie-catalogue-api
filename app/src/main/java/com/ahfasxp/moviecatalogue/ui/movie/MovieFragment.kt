@@ -9,10 +9,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.ahfasxp.moviecatalogue.R
-import com.ahfasxp.moviecatalogue.data.Main
+import com.ahfasxp.moviecatalogue.data.MainEntity
 import com.ahfasxp.moviecatalogue.ui.detail.DetailActivity
 import com.ahfasxp.moviecatalogue.ui.main.MainAdapter
 import kotlinx.android.synthetic.main.fragment_movie.*
@@ -23,8 +22,6 @@ import kotlinx.android.synthetic.main.fragment_movie.*
  * create an instance of this fragment.
  */
 class MovieFragment : Fragment() {
-    private lateinit var movieViewModel: MovieViewModel
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -35,32 +32,27 @@ class MovieFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        if (activity != null) {
+            val movieViewModel = ViewModelProvider(
+                this,
+                ViewModelProvider.NewInstanceFactory()
+            )[MovieViewModel::class.java]
+            val movie = movieViewModel.getMovies()
 
-        //Menginisialisasi RecycleView dari MainAdapter
-        val adapter = MainAdapter()
-        adapter.notifyDataSetChanged()
-        rv_movie.layoutManager = GridLayoutManager(activity, 2)
-        rv_movie.adapter = adapter
-        adapter.setOnItemClickCallback(object : MainAdapter.OnItemClickCallback {
-            override fun onItemClicked(data: Main) {
-                showSelectedMovie(data)
-            }
-        })
+            //Menginisialisasi RecycleView dari MainAdapter
+            val movieAdapter = MainAdapter()
+            movieAdapter.setData(movie)
+            movieAdapter.notifyDataSetChanged()
 
-        //Menginisialisasi MovieViewModel
-        movieViewModel = ViewModelProvider(
-            this,
-            ViewModelProvider.NewInstanceFactory()
-        ).get(MovieViewModel::class.java)
-        showLoading(true)
-        movieViewModel.setMovie()
-
-        movieViewModel.getMovies().observe(this, Observer { main ->
-            if (main != null) {
-                adapter.setData(main)
-                showLoading(false)
-            }
-        })
+            rv_movie.layoutManager = GridLayoutManager(activity, 2)
+            rv_movie.setHasFixedSize(true)
+            rv_movie.adapter = movieAdapter
+            movieAdapter.setOnItemClickCallback(object : MainAdapter.OnItemClickCallback {
+                override fun onItemClicked(data: MainEntity) {
+                    showSelectedMovie(data)
+                }
+            })
+        }
     }
 
     private fun showLoading(state: Boolean) {
@@ -72,7 +64,7 @@ class MovieFragment : Fragment() {
     }
 
     //Metode item yang dipilih
-    private fun showSelectedMovie(movie: Main) {
+    private fun showSelectedMovie(movie: MainEntity) {
         Toast.makeText(activity, "Kamu memilih ${movie.title}", Toast.LENGTH_SHORT).show()
         //Tidak bisa menggunakan Navigation
 //        view?.findNavController()?.navigate(R.id.action_movieFragment_to_detailActivity)
