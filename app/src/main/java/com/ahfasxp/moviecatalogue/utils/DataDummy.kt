@@ -110,7 +110,7 @@ object DataDummy {
                 "The Good Doctor",
                 "His mind is a mystery, his methods are a miracle.",
                 "A young surgeon with Savant syndrome is recruited into the surgical unit of a prestigious hospital. The question will arise: can a person who doesn't have the ability to relate to people actually save their lives?",
-                "https://image.tmdb.org/t/p/w500/sWgBv7LV2PRoQgkxwlibdGXKz1S.jpg"
+                "https://image.tmdb.org/t/p/w500/bi4tb3GMYFVNUom65SJm7A66rgM.jpg"
             )
         )
         tvShow.add(
