@@ -50,7 +50,7 @@ class DetailActivity : AppCompatActivity() {
             .into(img_poster)
         tv_title.text = main.title
         tv_tagline.text = main.tagline
-        tv_overview.text = main.tagline
+        tv_overview.text = main.overview
         showLoading(false)
     }
 
