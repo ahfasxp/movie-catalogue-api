@@ -10,22 +10,19 @@ import com.ahfasxp.moviecatalogue.ui.tvShow.ShowFragment
 
 class SectionsPagerAdapter(private val mContext: Context, fm: FragmentManager) :
     FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
-    private val TAB_TITLES = intArrayOf(R.string.tabs_text_1, R.string.tabs_text_2)
+    companion object {
+        private val TAB_TITLES = intArrayOf(R.string.tabs_text_1, R.string.tabs_text_2)
+    }
 
-    override fun getItem(position: Int): Fragment {
-        var fragment: Fragment? = null
+    override fun getItem(position: Int): Fragment =
         when (position) {
-            0 -> fragment = MovieFragment()
-            1 -> fragment = ShowFragment()
+            0 -> MovieFragment()
+            1 -> ShowFragment()
+            else -> Fragment()
         }
-        return fragment as Fragment
-    }
 
-    override fun getPageTitle(position: Int): CharSequence? {
-        return mContext.resources.getString(TAB_TITLES[position])
-    }
+    override fun getPageTitle(position: Int): CharSequence? =
+        mContext.resources.getString(TAB_TITLES[position])
 
-    override fun getCount(): Int {
-        return 2
-    }
+    override fun getCount(): Int = TAB_TITLES.size
 }

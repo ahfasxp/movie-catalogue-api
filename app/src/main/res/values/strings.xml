@@ -9,4 +9,6 @@
     <string name="title">Title</string>
     <string name="tagline">Tagline</string>
     <string name="overview">Overview</string>
+    <string name="movie">movie</string>
+    <string name="show">show</string>
 </resources>

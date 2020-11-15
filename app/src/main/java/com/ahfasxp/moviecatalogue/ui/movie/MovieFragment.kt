@@ -37,6 +37,7 @@ class MovieFragment : Fragment() {
                 this,
                 ViewModelProvider.NewInstanceFactory()
             )[MovieViewModel::class.java]
+            showLoading(true)
             val movie = movieViewModel.getMovies()
 
             //Menginisialisasi RecycleView dari MainAdapter
@@ -47,6 +48,7 @@ class MovieFragment : Fragment() {
             rv_movie.layoutManager = GridLayoutManager(activity, 2)
             rv_movie.setHasFixedSize(true)
             rv_movie.adapter = movieAdapter
+            showLoading(false)
             movieAdapter.setOnItemClickCallback(object : MainAdapter.OnItemClickCallback {
                 override fun onItemClicked(data: MainEntity) {
                     showSelectedMovie(data)
@@ -66,8 +68,6 @@ class MovieFragment : Fragment() {
     //Metode item yang dipilih
     private fun showSelectedMovie(movie: MainEntity) {
         Toast.makeText(activity, "Kamu memilih ${movie.title}", Toast.LENGTH_SHORT).show()
-        //Tidak bisa menggunakan Navigation
-//        view?.findNavController()?.navigate(R.id.action_movieFragment_to_detailActivity)
         val intent = Intent(activity, DetailActivity::class.java)
         intent.putExtra(DetailActivity.EXTRA_ID, movie.id)
         intent.putExtra(DetailActivity.EXTRA_TYPE, "movie")

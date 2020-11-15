@@ -27,14 +27,14 @@ class DetailActivity : AppCompatActivity() {
         val id = intent.getStringExtra(EXTRA_ID)
         val type = intent.getStringExtra(EXTRA_TYPE)
         when (type) {
-            "movie" -> {
+            getString(R.string.movie) -> {
                 showLoading(true)
                 if (id != null) {
                     detailViewModel.setSelected(id)
                     pupulateDetail(detailViewModel.getMovie())
                 }
             }
-            "show" -> {
+            getString(R.string.show) -> {
                 showLoading(true)
                 if (id != null) {
                     detailViewModel.setSelected(id)

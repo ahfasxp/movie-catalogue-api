@@ -39,6 +39,7 @@ class ShowFragment : Fragment() {
                 ViewModelProvider.NewInstanceFactory()
             )[ShowViewModel::class.java]
             val show = showViewModel.getTvshow()
+            showLoading(true)
 
             //Menginisialisasi RecycleView dari MainAdapter
             val showAdapter = MainAdapter()
@@ -48,6 +49,7 @@ class ShowFragment : Fragment() {
             rv_show.layoutManager = GridLayoutManager(activity, 2)
             rv_show.setHasFixedSize(true)
             rv_show.adapter = showAdapter
+            showLoading(false)
             showAdapter.setOnItemClickCallback(object : MainAdapter.OnItemClickCallback {
                 override fun onItemClicked(data: MainEntity) {
                     showSelectedShow(data)
@@ -67,8 +69,6 @@ class ShowFragment : Fragment() {
     //Metode item yang dipilih
     private fun showSelectedShow(show: MainEntity) {
         Toast.makeText(activity, "Kamu memilih ${show.title}", Toast.LENGTH_SHORT).show()
-        //Tidak bisa menggunakan Navigation
-//        view?.findNavController()?.navigate(R.id.action_movieFragment_to_detailActivity)
         val intent = Intent(activity, DetailActivity::class.java)
         intent.putExtra(DetailActivity.EXTRA_ID, show.id)
         intent.putExtra(DetailActivity.EXTRA_TYPE, "show")
