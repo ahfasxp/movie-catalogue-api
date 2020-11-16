@@ -22,7 +22,7 @@ class CatalogueRepository private constructor(private val remoteDataSource: Remo
     override fun getAllMovies(): LiveData<List<MainEntity>> {
         val movieResults = MutableLiveData<List<MainEntity>>()
         remoteDataSource.getAllMovies(object : RemoteDataSource.LoadMoviesCallback {
-            override fun onAllCoursesReceived(movieResponses: List<MainResponse>) {
+            override fun onAllMoviesReceived(movieResponses: List<MainResponse>) {
                 val movieList = ArrayList<MainEntity>()
                 for (response in movieResponses) {
                     val movie = MainEntity(
@@ -43,7 +43,7 @@ class CatalogueRepository private constructor(private val remoteDataSource: Remo
     override fun getAllShows(): LiveData<List<MainEntity>> {
         val showResults = MutableLiveData<List<MainEntity>>()
         remoteDataSource.getAllShows(object : RemoteDataSource.LoadShowsCallback {
-            override fun onAllCoursesReceived(showResponses: List<MainResponse>) {
+            override fun onAllShowsReceived(showResponses: List<MainResponse>) {
                 val showList = ArrayList<MainEntity>()
                 for (response in showResponses) {
                     val show = MainEntity(
@@ -64,7 +64,7 @@ class CatalogueRepository private constructor(private val remoteDataSource: Remo
     override fun getDetailMovie(id: String): LiveData<MainEntity> {
         val movieResult = MutableLiveData<MainEntity>()
         remoteDataSource.getAllMovies(object : RemoteDataSource.LoadMoviesCallback {
-            override fun onAllCoursesReceived(movieResponses: List<MainResponse>) {
+            override fun onAllMoviesReceived(movieResponses: List<MainResponse>) {
                 lateinit var movie: MainEntity
                 for (response in movieResponses) {
                     if (response.id == id) {
@@ -86,7 +86,7 @@ class CatalogueRepository private constructor(private val remoteDataSource: Remo
     override fun getDetailShow(id: String): LiveData<MainEntity> {
         val showResult = MutableLiveData<MainEntity>()
         remoteDataSource.getAllShows(object : RemoteDataSource.LoadShowsCallback {
-            override fun onAllCoursesReceived(showResponses: List<MainResponse>) {
+            override fun onAllShowsReceived(showResponses: List<MainResponse>) {
                 lateinit var show: MainEntity
                 for (response in showResponses) {
                     if (response.id == id) {

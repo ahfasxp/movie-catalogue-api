@@ -22,23 +22,23 @@ class RemoteDataSource private constructor(private val jsonHelper: JsonHelper) {
 
     fun getAllMovies(callback: LoadMoviesCallback) {
         handler.postDelayed(
-            { callback.onAllCoursesReceived(jsonHelper.loadMovies()) },
+            { callback.onAllMoviesReceived(jsonHelper.loadMovies()) },
             SERVICE_LATENCY_IN_MILLIS
         )
     }
 
     fun getAllShows(callback: LoadShowsCallback) {
         handler.postDelayed(
-            { callback.onAllCoursesReceived(jsonHelper.loadShows()) },
+            { callback.onAllShowsReceived(jsonHelper.loadShows()) },
             SERVICE_LATENCY_IN_MILLIS
         )
     }
 
     interface LoadMoviesCallback {
-        fun onAllCoursesReceived(movieResponses: List<MainResponse>)
+        fun onAllMoviesReceived(movieResponses: List<MainResponse>)
     }
 
     interface LoadShowsCallback {
-        fun onAllCoursesReceived(showResponses: List<MainResponse>)
+        fun onAllShowsReceived(showResponses: List<MainResponse>)
     }
 }

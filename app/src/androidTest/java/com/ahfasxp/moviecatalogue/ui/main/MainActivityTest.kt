@@ -29,6 +29,7 @@ class MainActivityTest {
 
     @Test
     fun loadMovie() {
+        delay2seconds()
         //Memastikan rv_movie dalam keadaan tampil
         onView(allOf(withId(R.id.rv_movie), isDisplayed()))
         //Gulir rv_movie ke posisi data terakhir
@@ -42,6 +43,7 @@ class MainActivityTest {
 
     @Test
     fun loadDetailMovie() {
+        delay2seconds()
         //Memberi tindakan klik pada data pertama di rv_movie
         onView(allOf(withId(R.id.rv_movie), isDisplayed())).perform(
             RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
@@ -49,6 +51,7 @@ class MainActivityTest {
                 ViewActions.click()
             )
         )
+        delay2seconds()
         //Memastikan ImageVIew tampil sesuai yang diharapkan
         onView(allOf(withId(R.id.img_poster), isDisplayed()))
         //Memastikan TextView tampil sesuai yang diharapkan
@@ -64,6 +67,7 @@ class MainActivityTest {
     fun loadShow() {
         //Klik TabLayout dengan teks tvshow
         onView(withText("TV SHOW")).perform(ViewActions.click())
+        delay2seconds()
         //Memastikan rv_show dalam keadaan tampil
         onView(allOf(withId(R.id.rv_show), isDisplayed()))
         //Gulir rv_show ke posisi data terakhir
@@ -79,6 +83,7 @@ class MainActivityTest {
     fun loadDetailShow() {
         //Klik TabLayout dengan teks tvshow
         onView(allOf(withText("TV SHOW"), isDisplayed())).perform(ViewActions.click())
+        delay2seconds()
         //Memberi tindakan klik pada data pertama di rv_movie
         onView(allOf(withId(R.id.rv_show), isDisplayed())).perform(
             RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
@@ -86,6 +91,7 @@ class MainActivityTest {
                 ViewActions.click()
             )
         )
+        delay2seconds()
         //Memastikan ImageVIew tampil sesuai yang diharapkan
         onView(allOf(withId(R.id.img_poster), isDisplayed()))
         //Memastikan TextView tampil sesuai yang diharapkan
@@ -95,5 +101,13 @@ class MainActivityTest {
         onView(withId(R.id.tv_tagline)).check(matches(withText(dummyShow[0].tagline)))
         onView(allOf(withId(R.id.tv_overview), isDisplayed()))
         onView(withId(R.id.tv_overview)).check(matches(withText(dummyShow[0].overview)))
+    }
+
+    private fun delay2seconds() {
+        try {
+            Thread.sleep(2000)
+        } catch (e: InterruptedException) {
+            e.printStackTrace()
+        }
     }
 }

@@ -1,18 +1,20 @@
 package com.ahfasxp.moviecatalogue.data
 
-import com.ahfasxp.moviecatalogue.data.source.local.entity.MainEntity
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.ahfasxp.moviecatalogue.data.source.remote.RemoteDataSource
-import com.ahfasxp.moviecatalogue.data.source.remote.response.MainResponse
 import com.ahfasxp.moviecatalogue.utils.DataDummy
+import com.ahfasxp.moviecatalogue.utils.LiveDataTestUtil
 import org.junit.Assert.*
+import org.junit.Rule
 import org.junit.Test
-import org.mockito.Mockito
-import org.mockito.Mockito.`when`
-import org.mockito.Mockito.verify
-import org.mockito.stubbing.OngoingStubbing
+import com.nhaarman.mockitokotlin2.any
+import org.mockito.Mockito.*
 
 class CatalogueRepositoryTest {
-    private val remote = Mockito.mock(RemoteDataSource::class.java)
+    @get:Rule
+    var instantTaskExecutorRule = InstantTaskExecutorRule()
+
+    private val remote = mock(RemoteDataSource::class.java)
     private val catalogueRepository = FakeCatalogueRepository(remote)
 
     private val movieResponses = DataDummy.generateRemoteDummyMovie()
@@ -21,37 +23,59 @@ class CatalogueRepositoryTest {
 
     @Test
     fun getAllMovies() {
-        `when`<List<MainResponse>>(remote.getAllMovies()).thenReturn(movieResponses)
-        val movieEntities = catalogueRepository.getAllMovies()
-        verify<RemoteDataSource>(remote).getAllMovies()
+        doAnswer { invocation ->
+            (invocation.arguments[0] as RemoteDataSource.LoadMoviesCallback)
+                .onAllMoviesReceived(movieResponses)
+            null
+        }.`when`(remote).getAllMovies(any())
+        val movieEntities = LiveDataTestUtil.getValue(catalogueRepository.getAllMovies())
+        verify(remote).getAllMovies(any())
         assertNotNull(movieEntities)
         assertEquals(movieResponses.size.toLong(), movieEntities.size.toLong())
     }
 
     @Test
     fun getAllShows() {
-        `when`<List<MainResponse>>(remote.getAllShows()).thenReturn(showResponses)
-        val showEntities = catalogueRepository.getAllShows()
-        verify<RemoteDataSource>(remote).getAllShows()
+        doAnswer { invocation ->
+            (invocation.arguments[0] as RemoteDataSource.LoadShowsCallback)
+                .onAllShowsReceived(showResponses)
+            null
+        }.`when`(remote).getAllShows(any())
+        val showEntities = LiveDataTestUtil.getValue(catalogueRepository.getAllShows())
+        verify(remote).getAllShows(any())
         assertNotNull(showEntities)
         assertEquals(showResponses.size.toLong(), showEntities.size.toLong())
     }
 
     @Test
-    fun getAllDetailMovie() {
-        `when`<List<MainResponse>>(remote.getAllMovies()).thenReturn(movieResponses)
-        val resultMovie = catalogueRepository.getDetailMovie(id)
-        verify<RemoteDataSource>(remote).getAllMovies()
-        assertNotNull(resultMovie)
-        assertEquals(movieResponses[0].title, resultMovie.title)
+    fun getDetailMovie() {
+        doAnswer { invocation ->
+            (invocation.arguments[0] as RemoteDataSource.LoadMoviesCallback)
+                .onAllMoviesReceived(movieResponses)
+            null
+        }.`when`(remote).getAllMovies(any())
+
+        val movieEntities =
+            LiveDataTestUtil.getValue(catalogueRepository.getDetailMovie(id))
+        verify(remote).getAllMovies(any())
+        assertNotNull(movieEntities)
+        assertNotNull(movieEntities.title)
+        assertEquals(movieResponses[0].title, movieEntities.title)
     }
 
     @Test
-    fun getAllDetailShow() {
-        `when`<List<MainResponse>>(remote.getAllShows()).thenReturn(showResponses)
-        val resultShow = catalogueRepository.getDetailShow(id)
-        verify<RemoteDataSource>(remote).getAllShows()
-        assertNotNull(resultShow)
-        assertEquals(showResponses[0].title, resultShow.title)
+    fun getDetailShow() {
+        doAnswer { invocation ->
+            (invocation.arguments[0] as RemoteDataSource.LoadShowsCallback)
+                .onAllShowsReceived(showResponses)
+            null
+        }.`when`(remote).getAllShows(any())
+
+        val showEntities =
+            LiveDataTestUtil.getValue(catalogueRepository.getDetailShow(id))
+        verify(remote).getAllShows(any())
+        assertNotNull(showEntities)
+        assertNotNull(showEntities.title)
+        assertEquals(showResponses[0].title, showEntities.title)
     }
 }
