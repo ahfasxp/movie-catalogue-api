@@ -1,7 +1,7 @@
 package com.ahfasxp.moviecatalogue.di
 
 import android.content.Context
-import com.ahfasxp.moviecatalogue.data.source.CatalogueRepository
+import com.ahfasxp.moviecatalogue.data.CatalogueRepository
 import com.ahfasxp.moviecatalogue.data.source.remote.RemoteDataSource
 import com.ahfasxp.moviecatalogue.utils.JsonHelper
 

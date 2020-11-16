@@ -3,7 +3,7 @@ package com.ahfasxp.moviecatalogue.viewmodel
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.ahfasxp.moviecatalogue.data.source.CatalogueRepository
+import com.ahfasxp.moviecatalogue.data.CatalogueRepository
 import com.ahfasxp.moviecatalogue.di.Injection
 import com.ahfasxp.moviecatalogue.ui.detail.DetailViewModel
 import com.ahfasxp.moviecatalogue.ui.movie.MovieViewModel

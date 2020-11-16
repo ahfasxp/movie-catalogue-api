@@ -1,4 +1,4 @@
-package com.ahfasxp.moviecatalogue.data
+package com.ahfasxp.moviecatalogue.data.source.local.entity
 
 data class MainEntity(
     val id: String,

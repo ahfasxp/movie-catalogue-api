@@ -1,6 +1,6 @@
-package com.ahfasxp.moviecatalogue.data.source
+package com.ahfasxp.moviecatalogue.data
 
-import com.ahfasxp.moviecatalogue.data.MainEntity
+import com.ahfasxp.moviecatalogue.data.source.local.entity.MainEntity
 
 interface CatalogueDataSource {
     fun getAllMovies(): List<MainEntity>

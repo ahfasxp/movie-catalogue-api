@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ahfasxp.moviecatalogue.R
-import com.ahfasxp.moviecatalogue.data.MainEntity
+import com.ahfasxp.moviecatalogue.data.source.local.entity.MainEntity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.list_items.view.*

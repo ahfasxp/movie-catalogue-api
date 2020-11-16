@@ -1,21 +1,11 @@
-package com.ahfasxp.moviecatalogue.data.source
+package com.ahfasxp.moviecatalogue.data
 
-import com.ahfasxp.moviecatalogue.data.MainEntity
+import com.ahfasxp.moviecatalogue.data.source.local.entity.MainEntity
 import com.ahfasxp.moviecatalogue.data.source.remote.RemoteDataSource
 
-class CatalogueRepository private constructor(private val remoteDataSource: RemoteDataSource) :
+class FakeCatalogueRepository(private val remoteDataSource: RemoteDataSource) :
     CatalogueDataSource {
-
-    companion object {
-        @Volatile
-        private var instance: CatalogueRepository? = null
-        fun getInstance(remoteData: RemoteDataSource): CatalogueRepository =
-            instance ?: synchronized(this) {
-                instance ?: CatalogueRepository(remoteData)
-            }
-    }
-
-    override fun getAllMovies(): List<MainEntity> {
+    override fun getAllMovies(): ArrayList<MainEntity> {
         val moviesResponses = remoteDataSource.getAllMovies()
         val movieList = ArrayList<MainEntity>()
         for (response in moviesResponses) {
@@ -31,7 +21,7 @@ class CatalogueRepository private constructor(private val remoteDataSource: Remo
         return movieList
     }
 
-    override fun getAllShows(): List<MainEntity> {
+    override fun getAllShows(): ArrayList<MainEntity> {
         val showsResponses = remoteDataSource.getAllShows()
         val showList = ArrayList<MainEntity>()
         for (response in showsResponses) {
