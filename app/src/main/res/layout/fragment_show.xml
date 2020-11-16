@@ -27,5 +27,6 @@
         android:id="@+id/rv_show"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/txt_show" />
+        android:layout_below="@+id/txt_show"
+        tools:listitem="@layout/list_items" />
 </RelativeLayout>

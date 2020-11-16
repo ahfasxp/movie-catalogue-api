@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.ahfasxp.moviecatalogue.R
@@ -14,6 +15,7 @@ import com.ahfasxp.moviecatalogue.data.source.local.entity.MainEntity
 import com.ahfasxp.moviecatalogue.ui.detail.DetailActivity
 import com.ahfasxp.moviecatalogue.ui.main.MainAdapter
 import com.ahfasxp.moviecatalogue.viewmodel.ViewModelFactory
+import kotlinx.android.synthetic.main.fragment_movie.*
 import kotlinx.android.synthetic.main.fragment_show.*
 import kotlinx.android.synthetic.main.fragment_show.progressBar
 
@@ -37,31 +39,26 @@ class ShowFragment : Fragment() {
             //ViewModel
             val factory = ViewModelFactory.getInstance(requireActivity())
             val showViewModel = ViewModelProvider(this, factory)[ShowViewModel::class.java]
-            val show = showViewModel.getTvshow()
-            showLoading(true)
 
             //Menginisialisasi RecycleView dari MainAdapter
             val showAdapter = MainAdapter()
-            showAdapter.setData(show)
-            showAdapter.notifyDataSetChanged()
+            progressBar.visibility = View.VISIBLE
+            showViewModel.getTvshow().observe(this, Observer { shows ->
+                progressBar.visibility = View.GONE
+                showAdapter.setData(shows)
+                showAdapter.notifyDataSetChanged()
+            })
 
-            rv_show.layoutManager = GridLayoutManager(activity, 2)
-            rv_show.setHasFixedSize(true)
-            rv_show.adapter = showAdapter
-            showLoading(false)
+            with(rv_show) {
+                layoutManager = GridLayoutManager(activity, 2)
+                setHasFixedSize(true)
+                adapter = showAdapter
+            }
             showAdapter.setOnItemClickCallback(object : MainAdapter.OnItemClickCallback {
                 override fun onItemClicked(data: MainEntity) {
                     showSelectedShow(data)
                 }
             })
-        }
-    }
-
-    private fun showLoading(state: Boolean) {
-        if (state) {
-            progressBar.visibility = View.VISIBLE
-        } else {
-            progressBar.visibility = View.GONE
         }
     }
 

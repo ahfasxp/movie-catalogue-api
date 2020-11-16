@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.ahfasxp.moviecatalogue.R
@@ -36,31 +37,26 @@ class MovieFragment : Fragment() {
             //ViewModel
             val factory = ViewModelFactory.getInstance(requireActivity())
             val movieViewModel = ViewModelProvider(this, factory)[MovieViewModel::class.java]
-            val movie = movieViewModel.getMovies()
-            showLoading(true)
 
             //Menginisialisasi RecycleView dari MainAdapter
             val movieAdapter = MainAdapter()
-            movieAdapter.setData(movie)
-            movieAdapter.notifyDataSetChanged()
+            progressBar.visibility = View.VISIBLE
+            movieViewModel.getMovies().observe(this, Observer { movies ->
+                progressBar.visibility = View.GONE
+                movieAdapter.setData(movies)
+                movieAdapter.notifyDataSetChanged()
+            })
 
-            rv_movie.layoutManager = GridLayoutManager(activity, 2)
-            rv_movie.setHasFixedSize(true)
-            rv_movie.adapter = movieAdapter
-            showLoading(false)
+            with(rv_movie) {
+                layoutManager = GridLayoutManager(activity, 2)
+                setHasFixedSize(true)
+                adapter = movieAdapter
+            }
             movieAdapter.setOnItemClickCallback(object : MainAdapter.OnItemClickCallback {
                 override fun onItemClicked(data: MainEntity) {
                     showSelectedMovie(data)
                 }
             })
-        }
-    }
-
-    private fun showLoading(state: Boolean) {
-        if (state) {
-            progressBar.visibility = View.VISIBLE
-        } else {
-            progressBar.visibility = View.GONE
         }
     }
 

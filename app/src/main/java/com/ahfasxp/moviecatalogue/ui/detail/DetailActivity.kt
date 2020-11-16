@@ -3,6 +3,7 @@ package com.ahfasxp.moviecatalogue.ui.detail
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.ahfasxp.moviecatalogue.R
 import com.ahfasxp.moviecatalogue.data.source.local.entity.MainEntity
@@ -28,17 +29,19 @@ class DetailActivity : AppCompatActivity() {
         val type = intent.getStringExtra(EXTRA_TYPE)
         when (type) {
             getString(R.string.movie) -> {
-                showLoading(true)
                 if (id != null) {
                     detailViewModel.setSelected(id)
-                    pupulateDetail(detailViewModel.getMovie())
+                    progressBar.visibility = View.VISIBLE
+                    detailViewModel.getMovie()
+                        .observe(this, Observer { movie -> pupulateDetail(movie) })
                 }
             }
             getString(R.string.show) -> {
-                showLoading(true)
                 if (id != null) {
                     detailViewModel.setSelected(id)
-                    pupulateDetail(detailViewModel.getShow())
+                    progressBar.visibility = View.VISIBLE
+                    detailViewModel.getShow()
+                        .observe(this, Observer { show -> pupulateDetail(show) })
                 }
             }
         }
@@ -51,14 +54,6 @@ class DetailActivity : AppCompatActivity() {
         tv_title.text = main.title
         tv_tagline.text = main.tagline
         tv_overview.text = main.overview
-        showLoading(false)
-    }
-
-    private fun showLoading(state: Boolean) {
-        if (state) {
-            progressBar.visibility = View.VISIBLE
-        } else {
-            progressBar.visibility = View.GONE
-        }
+        progressBar.visibility = View.GONE
     }
 }
