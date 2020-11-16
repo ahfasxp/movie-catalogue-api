@@ -6,6 +6,7 @@ import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import com.ahfasxp.moviecatalogue.R
 import com.ahfasxp.moviecatalogue.data.MainEntity
+import com.ahfasxp.moviecatalogue.viewmodel.ViewModelFactory
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_detail.*
 
@@ -19,10 +20,9 @@ class DetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
         //ViewModel
-        val detailViewModel: DetailViewModel = ViewModelProvider(
-            this,
-            ViewModelProvider.NewInstanceFactory()
-        )[DetailViewModel::class.java]
+        val factory = ViewModelFactory.getInstance(this)
+        val detailViewModel: DetailViewModel =
+            ViewModelProvider(this, factory)[DetailViewModel::class.java]
 
         val id = intent.getStringExtra(EXTRA_ID)
         val type = intent.getStringExtra(EXTRA_TYPE)

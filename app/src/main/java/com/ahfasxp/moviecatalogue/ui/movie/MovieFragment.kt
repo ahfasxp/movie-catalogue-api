@@ -14,6 +14,7 @@ import com.ahfasxp.moviecatalogue.R
 import com.ahfasxp.moviecatalogue.data.MainEntity
 import com.ahfasxp.moviecatalogue.ui.detail.DetailActivity
 import com.ahfasxp.moviecatalogue.ui.main.MainAdapter
+import com.ahfasxp.moviecatalogue.viewmodel.ViewModelFactory
 import kotlinx.android.synthetic.main.fragment_movie.*
 
 /**
@@ -33,12 +34,11 @@ class MovieFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         if (activity != null) {
-            val movieViewModel = ViewModelProvider(
-                this,
-                ViewModelProvider.NewInstanceFactory()
-            )[MovieViewModel::class.java]
-            showLoading(true)
+            //ViewModel
+            val factory = ViewModelFactory.getInstance(requireActivity())
+            val movieViewModel = ViewModelProvider(this, factory)[MovieViewModel::class.java]
             val movie = movieViewModel.getMovies()
+            showLoading(true)
 
             //Menginisialisasi RecycleView dari MainAdapter
             val movieAdapter = MainAdapter()

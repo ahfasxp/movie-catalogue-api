@@ -1,0 +1,74 @@
+{
+  "movies": [
+    {
+      "id": "1",
+      "title": "The SpongeBob Movie: Sponge on the Run",
+      "tagline": "They're Not in Bikini Bottom Anymore.",
+      "overview": "When his best friend Gary is suddenly snatched away, SpongeBob takes Patrick on a madcap mission far beyond Bikini Bottom to save their pink-shelled pal.",
+      "poster_path": "https://image.tmdb.org/t/p/w500/jlJ8nDhMhCYJuzOw3f52CP1W8MW.jpg"
+    },
+    {
+      "id": "2",
+      "title": "Hard Kill",
+      "tagline": "Take on a madman. Save the world.",
+      "overview": "The work of billionaire tech CEO Donovan Chalmers is so valuable that he hires mercenaries to protect it, and a terrorist group kidnaps his daughter just to get it.",
+      "poster_path": "https://image.tmdb.org/t/p/w500/ugZW8ocsrfgI95pnQ7wrmKDxIe.jpg"
+    },
+    {
+      "id": "3",
+      "title": "Rogue City",
+      "tagline": "They're Not in Bikini Bottom Anymore.",
+      "overview": "Caught in the crosshairs of police corruption and Marseille’s warring gangs, a loyal cop must protect his squad by taking matters into his own hands.",
+      "poster_path": "https://image.tmdb.org/t/p/w500/9HT9982bzgN5on1sLRmc1GMn6ZC.jpg"
+    },
+    {
+      "id": "4",
+      "title": "Roald Dahl's The Witches",
+      "tagline": "They're real!.",
+      "overview": "In late 1967, a young orphaned boy goes to live with his loving grandma in the rural Alabama town of Demopolis. As the boy and his grandmother encounter some deceptively glamorous but thoroughly diabolical witches, she wisely whisks him away to a seaside resort. Regrettably, they arrive at precisely the same time that the world's Grand High Witch has gathered.",
+      "poster_path": "https://image.tmdb.org/t/p/w500/betExZlgK0l7CZ9CsCBVcwO1OjL.jpg"
+    },
+    {
+      "id": "5",
+      "title": "2067",
+      "tagline": "The fight for the future has begun.",
+      "overview": "A lowly utility worker is called to the future by a mysterious radio signal, he must leave his dying wife to embark on a journey that will force him to face his deepest fears in an attempt to change the fabric of reality and save humankind from its greatest environmental crisis yet.",
+      "poster_path": "https://image.tmdb.org/t/p/w500/7D430eqZj8y3oVkLFfsWXGRcpEG.jpg"
+    },
+    {
+      "id": "6",
+      "title": "Once Upon a Snowman",
+      "tagline": "Every snowman starts somewhere.",
+      "overview": "The previously untold origins of Olaf, the innocent and insightful, summer-loving snowman are revealed as we follow Olaf’s first steps as he comes to life and searches for his identity in the snowy mountains outside Arendelle.",
+      "poster_path": "https://image.tmdb.org/t/p/w500/hddzYJtfYYeMDOQVcH58n8m1W3A.jpg"
+    },
+    {
+      "id": "7",
+      "title": "The New Mutants",
+      "tagline": "It's time to face your demons.",
+      "overview": "Five young mutants, just discovering their abilities while held in a secret facility against their will, fight to escape their past sins and save themselves.",
+      "poster_path": "https://image.tmdb.org/t/p/w500/xrI4EnZWftpo1B7tTvlMUXVOikd.jpg"
+    },
+    {
+      "id": "8",
+      "title": "Welcome to Sudden Death",
+      "tagline": "They're Not in Bikini Bottom Anymore.",
+      "overview": "Jesse Freeman is a former special forces officer and explosives expert now working a regular job as a security guard in a state-of-the-art basketball arena. Trouble erupts when a tech-savvy cadre of terrorists kidnap the team's owner and Jesse's daughter during opening night. Facing a ticking clock and impossible odds, it's up to Jesse to not only save them but also a full house of fans in this highly charged action thriller.",
+      "poster_path": "https://image.tmdb.org/t/p/w500/elZ6JCzSEvFOq4gNjNeZsnRFsvj.jpg"
+    },
+    {
+      "id": "9",
+      "title": "After We Collided",
+      "tagline": "Can love overcome the past?.",
+      "overview": "Tessa finds herself struggling with her complicated relationship with Hardin; she faces a dilemma that could change their lives forever.",
+      "poster_path": "https://image.tmdb.org/t/p/w500/kiX7UYfOpYrMFSAGbI6j1pFkLzQ.jpg"
+    },
+    {
+      "id": "10",
+      "title": "Demon Slayer: Kimetsu no Yaiba - The Movie: Mugen Train",
+      "tagline": "With your blade, bring an end to the nightmare.",
+      "overview": "Tanjirō Kamado, joined with Inosuke Hashibira, a boy raised by boars who wears a boar's head, and Zenitsu Agatsuma, a scared boy who reveals his true power when he sleeps, boards the Infinity Train on a new mission with the Fire Hashira, Kyōjurō Rengoku, to defeat a demon who has been tormenting the people and killing the demon slayers who oppose it!.",
+      "poster_path": "https://image.tmdb.org/t/p/w500/h8Rb9gBr48ODIwYUttZNYeMWeUU.jpg"
+    }
+  ]
+}

@@ -14,6 +14,7 @@ import com.ahfasxp.moviecatalogue.R
 import com.ahfasxp.moviecatalogue.data.MainEntity
 import com.ahfasxp.moviecatalogue.ui.detail.DetailActivity
 import com.ahfasxp.moviecatalogue.ui.main.MainAdapter
+import com.ahfasxp.moviecatalogue.viewmodel.ViewModelFactory
 import kotlinx.android.synthetic.main.fragment_show.*
 import kotlinx.android.synthetic.main.fragment_show.progressBar
 
@@ -34,10 +35,9 @@ class ShowFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         if (activity != null) {
-            val showViewModel = ViewModelProvider(
-                this,
-                ViewModelProvider.NewInstanceFactory()
-            )[ShowViewModel::class.java]
+            //ViewModel
+            val factory = ViewModelFactory.getInstance(requireActivity())
+            val showViewModel = ViewModelProvider(this, factory)[ShowViewModel::class.java]
             val show = showViewModel.getTvshow()
             showLoading(true)
 
