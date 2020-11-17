@@ -45,7 +45,10 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
             with(itemView) {
                 Glide.with(itemView.context)
                     .load(main.poster_path)
-                    .apply(RequestOptions().override(350, 550))
+                    .apply(
+                        RequestOptions().override(350, 550).placeholder(R.drawable.ic_loading)
+                            .error(R.drawable.ic_error)
+                    )
                     .into(img_poster)
                 tv_title.text = main.title
 

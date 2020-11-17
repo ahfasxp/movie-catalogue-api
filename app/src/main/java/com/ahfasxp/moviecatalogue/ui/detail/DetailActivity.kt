@@ -9,6 +9,7 @@ import com.ahfasxp.moviecatalogue.R
 import com.ahfasxp.moviecatalogue.data.source.local.entity.MainEntity
 import com.ahfasxp.moviecatalogue.viewmodel.ViewModelFactory
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.activity_detail.*
 
 class DetailActivity : AppCompatActivity() {
@@ -33,7 +34,7 @@ class DetailActivity : AppCompatActivity() {
                     detailViewModel.setSelected(id)
                     progressBar.visibility = View.VISIBLE
                     detailViewModel.getMovie()
-                        .observe(this, Observer { movie -> pupulateDetail(movie) })
+                        .observe(this, Observer { movie -> populateDetail(movie) })
                 }
             }
             getString(R.string.show) -> {
@@ -41,15 +42,19 @@ class DetailActivity : AppCompatActivity() {
                     detailViewModel.setSelected(id)
                     progressBar.visibility = View.VISIBLE
                     detailViewModel.getShow()
-                        .observe(this, Observer { show -> pupulateDetail(show) })
+                        .observe(this, Observer { show -> populateDetail(show) })
                 }
             }
         }
     }
 
-    private fun pupulateDetail(main: MainEntity) {
+    private fun populateDetail(main: MainEntity) {
         Glide.with(this@DetailActivity)
             .load(main.poster_path)
+            .apply(
+                RequestOptions().placeholder(R.drawable.ic_loading)
+                    .error(R.drawable.ic_error)
+            )
             .into(img_poster)
         tv_title.text = main.title
         tv_tagline.text = main.tagline
