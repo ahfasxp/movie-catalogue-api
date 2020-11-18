@@ -1,6 +1,6 @@
 @file:Suppress("DEPRECATION")
 
-package com.ahfasxp.moviecatalogue.ui.favorite
+package com.ahfasxp.moviecatalogue.ui
 
 import androidx.recyclerview.widget.RecyclerView
 import androidx.test.espresso.Espresso.onView
@@ -27,7 +27,7 @@ class MainActivityTest {
     private val dummyShow = DataDummy.generateDummyTvshow()
 
     @get:Rule
-    var activityRule = ActivityTestRule(FavoriteActivity::class.java)
+    var activityRule = ActivityTestRule(MainActivity::class.java)
 
     @Before
     fun setUp() {
