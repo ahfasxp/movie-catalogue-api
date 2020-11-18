@@ -1,4 +1,4 @@
-package com.ahfasxp.moviecatalogue.ui.main
+package com.ahfasxp.moviecatalogue.ui
 
 import android.view.LayoutInflater
 import android.view.View
@@ -29,12 +29,12 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): MainAdapter.MainViewHolder {
+    ): MainViewHolder {
         val mView = LayoutInflater.from(parent.context).inflate(R.layout.list_items, parent, false)
         return MainViewHolder(mView)
     }
 
-    override fun onBindViewHolder(holder: MainAdapter.MainViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
         holder.bind(mData[position])
     }
 

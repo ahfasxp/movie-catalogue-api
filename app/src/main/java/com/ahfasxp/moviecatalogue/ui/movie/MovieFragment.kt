@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.ahfasxp.moviecatalogue.R
 import com.ahfasxp.moviecatalogue.data.source.local.entity.MainEntity
 import com.ahfasxp.moviecatalogue.ui.detail.DetailActivity
-import com.ahfasxp.moviecatalogue.ui.main.MainAdapter
+import com.ahfasxp.moviecatalogue.ui.MainAdapter
 import com.ahfasxp.moviecatalogue.viewmodel.ViewModelFactory
 import kotlinx.android.synthetic.main.fragment_movie.*
 

@@ -1,14 +1,13 @@
-package com.ahfasxp.moviecatalogue.ui.main
+package com.ahfasxp.moviecatalogue.ui.favorite
 
-import android.content.Context
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.ahfasxp.moviecatalogue.R
-import com.ahfasxp.moviecatalogue.ui.movie.MovieFragment
-import com.ahfasxp.moviecatalogue.ui.tvShow.ShowFragment
+import com.ahfasxp.moviecatalogue.ui.favorite.favoriteMovie.FavoriteMovieFragment
+import com.ahfasxp.moviecatalogue.ui.favorite.favoriteTvshow.FavoriteShowFragment
 
-class SectionsPagerAdapter(private val mContext: Context, fm: FragmentManager) :
+class SectionsPagerAdapter(private val mContext: FavoriteFragment, fm: FragmentManager) :
     FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
     companion object {
         private val TAB_TITLES = intArrayOf(R.string.tabs_text_1, R.string.tabs_text_2)
@@ -16,8 +15,8 @@ class SectionsPagerAdapter(private val mContext: Context, fm: FragmentManager) :
 
     override fun getItem(position: Int): Fragment =
         when (position) {
-            0 -> MovieFragment()
-            1 -> ShowFragment()
+            0 -> FavoriteMovieFragment()
+            1 -> FavoriteShowFragment()
             else -> Fragment()
         }
 

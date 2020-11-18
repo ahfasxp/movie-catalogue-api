@@ -1,15 +1,13 @@
 @file:Suppress("DEPRECATION")
 
-package com.ahfasxp.moviecatalogue.ui.main
+package com.ahfasxp.moviecatalogue.ui.favorite
 
 import androidx.recyclerview.widget.RecyclerView
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.IdlingRegistry
 import androidx.test.espresso.action.ViewActions
-import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.RecyclerViewActions
-import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
 import androidx.test.rule.ActivityTestRule
@@ -29,7 +27,7 @@ class MainActivityTest {
     private val dummyShow = DataDummy.generateDummyTvshow()
 
     @get:Rule
-    var activityRule = ActivityTestRule(MainActivity::class.java)
+    var activityRule = ActivityTestRule(FavoriteActivity::class.java)
 
     @Before
     fun setUp() {
