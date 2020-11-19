@@ -23,8 +23,8 @@ class FavoriteFragment : Fragment() {
             //Setup ViewPager
             val sectionsPagerAdapter =
                 SectionsPagerAdapter(this, requireActivity().supportFragmentManager)
-            vp_main.adapter = sectionsPagerAdapter
-            tabs_main.setupWithViewPager(vp_main)
+            vp_favorite.adapter = sectionsPagerAdapter
+            tabs_favorite.setupWithViewPager(vp_favorite)
         }
     }
 }

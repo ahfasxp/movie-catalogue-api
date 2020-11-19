@@ -2,27 +2,45 @@ package com.ahfasxp.moviecatalogue.data
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.ahfasxp.moviecatalogue.data.source.local.LocalDataSource
 import com.ahfasxp.moviecatalogue.data.source.local.entity.MainEntity
+import com.ahfasxp.moviecatalogue.data.source.remote.ApiResponse
 import com.ahfasxp.moviecatalogue.data.source.remote.RemoteDataSource
 import com.ahfasxp.moviecatalogue.data.source.remote.response.MainResponse
+import com.ahfasxp.moviecatalogue.utils.AppExecutors
+import com.ahfasxp.moviecatalogue.vo.Resource
 
-class CatalogueRepository private constructor(private val remoteDataSource: RemoteDataSource) :
-    CatalogueDataSource {
+class CatalogueRepository private constructor(
+    private val remoteDataSource: RemoteDataSource, private val localDataSource: LocalDataSource,
+    private val appExecutors: AppExecutors
+) : CatalogueDataSource {
 
     companion object {
         @Volatile
         private var instance: CatalogueRepository? = null
 
-        fun getInstance(remoteData: RemoteDataSource): CatalogueRepository =
+        fun getInstance(
+            remoteData: RemoteDataSource,
+            localData: LocalDataSource,
+            appExecutors: AppExecutors
+        ): CatalogueRepository =
             instance ?: synchronized(this) {
-                instance ?: CatalogueRepository(remoteData)
+                instance ?: CatalogueRepository(remoteData, localData, appExecutors)
             }
     }
 
-    override fun getAllMovies(): LiveData<List<MainEntity>> {
-        val movieResults = MutableLiveData<List<MainEntity>>()
-        remoteDataSource.getAllMovies(object : RemoteDataSource.LoadMoviesCallback {
-            override fun onAllMoviesReceived(movieResponses: List<MainResponse>) {
+    override fun getAllMovies(): LiveData<Resource<List<MainEntity>>> {
+        return object : NetworkBoundResource<List<MainEntity>, List<MainResponse>>(appExecutors) {
+            public override fun loadFromDB(): LiveData<List<MainEntity>> =
+                localDataSource.getAllMovies()
+
+            override fun shouldFetch(data: List<MainEntity>?): Boolean =
+                data == null || data.isEmpty()
+
+            public override fun createCall(): LiveData<ApiResponse<List<MainResponse>>> =
+                remoteDataSource.getAllMovies()
+
+            public override fun saveCallResult(movieResponses: List<MainResponse>) {
                 val movieList = ArrayList<MainEntity>()
                 for (response in movieResponses) {
                     val movie = MainEntity(
@@ -30,20 +48,30 @@ class CatalogueRepository private constructor(private val remoteDataSource: Remo
                         response.title,
                         response.tagline,
                         response.overview,
-                        response.poster_path
+                        response.poster_path,
+                        false,
+                        "movie"
                     )
                     movieList.add(movie)
                 }
-                movieResults.postValue(movieList)
+
+                localDataSource.insertCatalogue(movieList)
             }
-        })
-        return movieResults
+        }.asLiveData()
     }
 
-    override fun getAllShows(): LiveData<List<MainEntity>> {
-        val showResults = MutableLiveData<List<MainEntity>>()
-        remoteDataSource.getAllShows(object : RemoteDataSource.LoadShowsCallback {
-            override fun onAllShowsReceived(showResponses: List<MainResponse>) {
+    override fun getAllShows(): LiveData<Resource<List<MainEntity>>> {
+        return object : NetworkBoundResource<List<MainEntity>, List<MainResponse>>(appExecutors) {
+            public override fun loadFromDB(): LiveData<List<MainEntity>> =
+                localDataSource.getAllShows()
+
+            override fun shouldFetch(data: List<MainEntity>?): Boolean =
+                data == null || data.isEmpty()
+
+            public override fun createCall(): LiveData<ApiResponse<List<MainResponse>>> =
+                remoteDataSource.getAllShows()
+
+            public override fun saveCallResult(showResponses: List<MainResponse>) {
                 val showList = ArrayList<MainEntity>()
                 for (response in showResponses) {
                     val show = MainEntity(
@@ -51,20 +79,31 @@ class CatalogueRepository private constructor(private val remoteDataSource: Remo
                         response.title,
                         response.tagline,
                         response.overview,
-                        response.poster_path
+                        response.poster_path,
+                        false,
+                        "show"
                     )
                     showList.add(show)
                 }
-                showResults.postValue(showList)
+
+                localDataSource.insertCatalogue(showList)
             }
-        })
-        return showResults
+        }.asLiveData()
     }
 
-    override fun getDetailMovie(id: String): LiveData<MainEntity> {
-        val movieResult = MutableLiveData<MainEntity>()
-        remoteDataSource.getAllMovies(object : RemoteDataSource.LoadMoviesCallback {
-            override fun onAllMoviesReceived(movieResponses: List<MainResponse>) {
+    override fun getDetailMovie(id: String): LiveData<Resource<MainEntity>> {
+        return object : NetworkBoundResource<MainEntity, List<MainResponse>>(appExecutors) {
+            override fun loadFromDB(): LiveData<MainEntity> =
+                localDataSource.getDetailMovie(id)
+
+            override fun shouldFetch(data: MainEntity?): Boolean =
+                data == null
+
+            public override fun createCall(): LiveData<ApiResponse<List<MainResponse>>> =
+                remoteDataSource.getAllMovies()
+
+            override fun saveCallResult(movieResponses: List<MainResponse>) {
+                val movieList = ArrayList<MainEntity>()
                 lateinit var movie: MainEntity
                 for (response in movieResponses) {
                     if (response.id == id) {
@@ -73,20 +112,30 @@ class CatalogueRepository private constructor(private val remoteDataSource: Remo
                             response.title,
                             response.tagline,
                             response.overview,
-                            response.poster_path
+                            response.poster_path,
+                            false,
+                            "movie"
                         )
                     }
                 }
-                movieResult.postValue(movie)
+                localDataSource.insertCatalogue(movieList)
             }
-        })
-        return movieResult
+        }.asLiveData()
     }
 
-    override fun getDetailShow(id: String): LiveData<MainEntity> {
-        val showResult = MutableLiveData<MainEntity>()
-        remoteDataSource.getAllShows(object : RemoteDataSource.LoadShowsCallback {
-            override fun onAllShowsReceived(showResponses: List<MainResponse>) {
+    override fun getDetailShow(id: String): LiveData<Resource<MainEntity>> {
+        return object : NetworkBoundResource<MainEntity, List<MainResponse>>(appExecutors) {
+            override fun loadFromDB(): LiveData<MainEntity> =
+                localDataSource.getDetailShow(id)
+
+            override fun shouldFetch(data: MainEntity?): Boolean =
+                data == null
+
+            public override fun createCall(): LiveData<ApiResponse<List<MainResponse>>> =
+                remoteDataSource.getAllShows()
+
+            override fun saveCallResult(showResponses: List<MainResponse>) {
+                val showList = ArrayList<MainEntity>()
                 lateinit var show: MainEntity
                 for (response in showResponses) {
                     if (response.id == id) {
@@ -95,13 +144,24 @@ class CatalogueRepository private constructor(private val remoteDataSource: Remo
                             response.title,
                             response.tagline,
                             response.overview,
-                            response.poster_path
+                            response.poster_path,
+                            false,
+                            "show"
                         )
                     }
                 }
-                showResult.postValue(show)
+                localDataSource.insertCatalogue(showList)
             }
-        })
-        return showResult
+        }.asLiveData()
+    }
+
+    override fun getFavoriteMovie(): LiveData<List<MainEntity>> =
+        localDataSource.getFavoriteMovie()
+
+    override fun getFavoriteShow(): LiveData<List<MainEntity>> =
+        localDataSource.getFavoriteShow()
+
+    override fun setFavorite(main: MainEntity, state: Boolean) {
+        appExecutors.diskIO().execute { localDataSource.setFavorite(main, state) }
     }
 }

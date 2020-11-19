@@ -6,6 +6,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.ahfasxp.moviecatalogue.data.CatalogueRepository
 import com.ahfasxp.moviecatalogue.di.Injection
 import com.ahfasxp.moviecatalogue.ui.detail.DetailViewModel
+import com.ahfasxp.moviecatalogue.ui.favorite.favoriteMovie.FavoriteMovieViewModel
+import com.ahfasxp.moviecatalogue.ui.favorite.favoriteTvshow.FavoriteShowViewModel
 import com.ahfasxp.moviecatalogue.ui.movie.MovieViewModel
 import com.ahfasxp.moviecatalogue.ui.tvShow.ShowViewModel
 
@@ -30,6 +32,12 @@ class ViewModelFactory private constructor(private val mCatalogueRepository: Cat
             }
             modelClass.isAssignableFrom(ShowViewModel::class.java) -> {
                 return ShowViewModel(mCatalogueRepository) as T
+            }
+            modelClass.isAssignableFrom(FavoriteMovieViewModel::class.java) -> {
+                return FavoriteMovieViewModel(mCatalogueRepository) as T
+            }
+            modelClass.isAssignableFrom(FavoriteShowViewModel::class.java) -> {
+                return FavoriteShowViewModel(mCatalogueRepository) as T
             }
             modelClass.isAssignableFrom(DetailViewModel::class.java) -> {
                 return DetailViewModel(mCatalogueRepository) as T

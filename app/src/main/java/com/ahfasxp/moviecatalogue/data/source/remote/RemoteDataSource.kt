@@ -1,11 +1,12 @@
 package com.ahfasxp.moviecatalogue.data.source.remote
 
 import android.os.Handler
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.ahfasxp.moviecatalogue.data.source.remote.response.MainResponse
 import com.ahfasxp.moviecatalogue.utils.EspressoIdlingResource
 import com.ahfasxp.moviecatalogue.utils.JsonHelper
 
-@Suppress("DEPRECATION")
 class RemoteDataSource private constructor(private val jsonHelper: JsonHelper) {
     private val handler = Handler()
 
@@ -21,33 +22,28 @@ class RemoteDataSource private constructor(private val jsonHelper: JsonHelper) {
             }
     }
 
-    fun getAllMovies(callback: LoadMoviesCallback) {
+    fun getAllMovies(): LiveData<ApiResponse<List<MainResponse>>> {
         EspressoIdlingResource.increment()
+        val resultMovie = MutableLiveData<ApiResponse<List<MainResponse>>>()
         handler.postDelayed(
             {
-                callback.onAllMoviesReceived(jsonHelper.loadMovies())
+                resultMovie.value = ApiResponse.success(jsonHelper.loadMovies())
+                EspressoIdlingResource.decrement()
+            }, SERVICE_LATENCY_IN_MILLIS
+        )
+        return resultMovie
+    }
+
+    fun getAllShows(): LiveData<ApiResponse<List<MainResponse>>> {
+        EspressoIdlingResource.increment()
+        val resultShow = MutableLiveData<ApiResponse<List<MainResponse>>>()
+        handler.postDelayed(
+            {
+                resultShow.value = ApiResponse.success(jsonHelper.loadShows())
                 EspressoIdlingResource.decrement()
             },
             SERVICE_LATENCY_IN_MILLIS
         )
-    }
-
-    fun getAllShows(callback: LoadShowsCallback) {
-        EspressoIdlingResource.increment()
-        handler.postDelayed(
-            {
-                callback.onAllShowsReceived(jsonHelper.loadShows())
-                EspressoIdlingResource.decrement()
-            },
-            SERVICE_LATENCY_IN_MILLIS
-        )
-    }
-
-    interface LoadMoviesCallback {
-        fun onAllMoviesReceived(movieResponses: List<MainResponse>)
-    }
-
-    interface LoadShowsCallback {
-        fun onAllShowsReceived(showResponses: List<MainResponse>)
+        return resultShow
     }
 }
