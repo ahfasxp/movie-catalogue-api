@@ -14,6 +14,7 @@ import com.ahfasxp.moviecatalogue.R
 import com.ahfasxp.moviecatalogue.detail.DetailActivity
 import com.ahfasxp.moviecatalogue.core.ui.MainAdapter
 import com.ahfasxp.moviecatalogue.core.ui.ViewModelFactory
+import com.ahfasxp.moviecatalogue.core.vo.Resource
 import com.ahfasxp.moviecatalogue.core.vo.Status
 import kotlinx.android.synthetic.main.fragment_movie.*
 
@@ -43,14 +44,14 @@ class MovieFragment : Fragment() {
             progressBar.visibility = View.VISIBLE
             movieViewModel.getMovies.observe(this, Observer { movies ->
                 if (movies != null) {
-                    when (movies.status) {
-                        Status.LOADING -> progressBar.visibility = View.VISIBLE
-                        Status.SUCCESS -> {
+                    when (movies) {
+                        is Resource.Loading -> progressBar.visibility = View.VISIBLE
+                        is Resource.Success -> {
                             progressBar.visibility = View.GONE
                             movieAdapter.setData(movies.data)
                             movieAdapter.notifyDataSetChanged()
                         }
-                        Status.ERROR -> {
+                        is Resource.Error -> {
                             progressBar.visibility = View.GONE
                             Toast.makeText(context, "Terjadi kesalahan", Toast.LENGTH_SHORT).show()
                         }

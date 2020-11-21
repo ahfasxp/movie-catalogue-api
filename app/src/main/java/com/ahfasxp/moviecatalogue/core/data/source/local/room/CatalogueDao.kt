@@ -3,29 +3,30 @@ package com.ahfasxp.moviecatalogue.core.data.source.local.room
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.ahfasxp.moviecatalogue.core.data.source.local.entity.MainEntity
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface CatalogueDao {
     @Query("SELECT * FROM mainentities WHERE type = 'movie'")
-    fun getMovies(): LiveData<List<MainEntity>>
+    fun getMovies(): Flow<List<MainEntity>>
 
     @Query("SELECT * FROM mainentities WHERE type = 'show'")
-    fun getShows(): LiveData<List<MainEntity>>
-
-    @Query("SELECT * FROM mainentities WHERE id = :id AND type = 'movie'")
-    fun getDetailMovie(id: String): LiveData<MainEntity>
-
-    @Query("SELECT * FROM mainentities WHERE id = :id AND type = 'show'")
-    fun getDetailShow(id: String): LiveData<MainEntity>
+    fun getShows(): Flow<List<MainEntity>>
+//
+//    @Query("SELECT * FROM mainentities WHERE id = :id AND type = 'movie'")
+//    fun getDetailMovie(id: String): LiveData<MainEntity>
+//
+//    @Query("SELECT * FROM mainentities WHERE id = :id AND type = 'show'")
+//    fun getDetailShow(id: String): LiveData<MainEntity>
 
     @Query("SELECT * FROM mainentities where isFavorite = 1 AND type = 'movie'")
-    fun getFavoriteMovie(): LiveData<List<MainEntity>>
+    fun getFavoriteMovie(): Flow<List<MainEntity>>
 
     @Query("SELECT * FROM mainentities where isFavorite = 1 AND type = 'show'")
-    fun getFavoriteShow(): LiveData<List<MainEntity>>
+    fun getFavoriteShow(): Flow<List<MainEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertCatalogue(catalogue: List<MainEntity>)
+    suspend fun insertCatalogue(catalogue: List<MainEntity>)
 
     @Update
     fun updateCatalogue(catalogue: MainEntity)

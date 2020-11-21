@@ -13,6 +13,8 @@ import com.ahfasxp.moviecatalogue.core.domain.repository.ICatalogueRepository
 import com.ahfasxp.moviecatalogue.core.utils.AppExecutors
 import com.ahfasxp.moviecatalogue.core.utils.DataMapper
 import com.ahfasxp.moviecatalogue.core.vo.Resource
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 
 class CatalogueRepository private constructor(
     private val remoteDataSource: RemoteDataSource, private val localDataSource: LocalDataSource,
@@ -33,58 +35,50 @@ class CatalogueRepository private constructor(
             }
     }
 
-    override fun getAllMovies(): LiveData<Resource<List<Catalogue>>> =
-        object : NetworkBoundResource<List<Catalogue>, List<MovieResponse>>(appExecutors) {
-            public override fun loadFromDB(): LiveData<List<Catalogue>> {
-                return Transformations.map(localDataSource.getAllMovies()) {
-                    DataMapper.mapEntitiesToDomain(it)
-                }
+    override fun getAllMovies(): Flow<Resource<List<Catalogue>>> =
+        object : NetworkBoundResource<List<Catalogue>, List<MovieResponse>>() {
+            public override fun loadFromDB(): Flow<List<Catalogue>> {
+                return localDataSource.getAllMovies().map { DataMapper.mapEntitiesToDomain(it) }
             }
 
             override fun shouldFetch(data: List<Catalogue>?): Boolean =
 //                data == null || data.isEmpty()
                 true //agar selelu mengambil data dari internet
 
-            override fun createCall(): LiveData<ApiResponse<List<MovieResponse>>> =
+            override suspend fun createCall(): Flow<ApiResponse<List<MovieResponse>>> =
                 remoteDataSource.getAllMovies()
 
-            override fun saveCallResult(data: List<MovieResponse>) {
+            override suspend fun saveCallResult(data: List<MovieResponse>) {
                 val movieList = DataMapper.mapResponsesMovieToEntities(data)
                 Log.d("cekmovie", movieList.toString())
                 localDataSource.insertCatalogue(movieList)
             }
-        }.asLiveData()
+        }.asFlow()
 
-    override fun getAllShows(): LiveData<Resource<List<Catalogue>>> =
-        object : NetworkBoundResource<List<Catalogue>, List<ShowResponse>>(appExecutors) {
-            public override fun loadFromDB(): LiveData<List<Catalogue>> {
-                return Transformations.map(localDataSource.getAllShows()) {
-                    DataMapper.mapEntitiesToDomain(it)
-                }
+    override fun getAllShows(): Flow<Resource<List<Catalogue>>> =
+        object : NetworkBoundResource<List<Catalogue>, List<ShowResponse>>() {
+            public override fun loadFromDB(): Flow<List<Catalogue>> {
+                return localDataSource.getAllShows().map { DataMapper.mapEntitiesToDomain(it) }
             }
 
             override fun shouldFetch(data: List<Catalogue>?): Boolean =
                 data == null || data.isEmpty()
 
-            override fun createCall(): LiveData<ApiResponse<List<ShowResponse>>> =
+            override suspend fun createCall(): Flow<ApiResponse<List<ShowResponse>>> =
                 remoteDataSource.getAllShows()
 
-            override fun saveCallResult(data: List<ShowResponse>) {
+            override suspend fun saveCallResult(data: List<ShowResponse>) {
                 val showList = DataMapper.mapResponsesShowToEntities(data)
                 localDataSource.insertCatalogue(showList)
             }
-        }.asLiveData()
+        }.asFlow()
 
-    override fun getFavoriteMovie(): LiveData<List<Catalogue>> {
-        return Transformations.map(localDataSource.getFavoriteMovie()) {
-            DataMapper.mapEntitiesToDomain(it)
-        }
+    override fun getFavoriteMovie(): Flow<List<Catalogue>> {
+        return localDataSource.getFavoriteMovie().map { DataMapper.mapEntitiesToDomain(it) }
     }
 
-    override fun getFavoriteShow(): LiveData<List<Catalogue>> {
-        return Transformations.map(localDataSource.getFavoriteShow()) {
-            DataMapper.mapEntitiesToDomain(it)
-        }
+    override fun getFavoriteShow(): Flow<List<Catalogue>> {
+        return localDataSource.getFavoriteShow().map { DataMapper.mapEntitiesToDomain(it) }
     }
 
     override fun setFavorite(catalogue: Catalogue, state: Boolean) {

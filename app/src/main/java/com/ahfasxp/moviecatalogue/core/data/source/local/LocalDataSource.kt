@@ -3,6 +3,7 @@ package com.ahfasxp.moviecatalogue.core.data.source.local
 import androidx.lifecycle.LiveData
 import com.ahfasxp.moviecatalogue.core.data.source.local.entity.MainEntity
 import com.ahfasxp.moviecatalogue.core.data.source.local.room.CatalogueDao
+import kotlinx.coroutines.flow.Flow
 
 class LocalDataSource private constructor(private val mCatalogueDao: CatalogueDao) {
 
@@ -13,15 +14,15 @@ class LocalDataSource private constructor(private val mCatalogueDao: CatalogueDa
             INSTANCE ?: LocalDataSource(catalogueDao)
     }
 
-    fun getAllMovies(): LiveData<List<MainEntity>> = mCatalogueDao.getMovies()
+    fun getAllMovies(): Flow<List<MainEntity>> = mCatalogueDao.getMovies()
 
-    fun getAllShows(): LiveData<List<MainEntity>> = mCatalogueDao.getShows()
+    fun getAllShows(): Flow<List<MainEntity>> = mCatalogueDao.getShows()
 
-    fun getFavoriteMovie(): LiveData<List<MainEntity>> = mCatalogueDao.getFavoriteMovie()
+    fun getFavoriteMovie(): Flow<List<MainEntity>> = mCatalogueDao.getFavoriteMovie()
 
-    fun getFavoriteShow(): LiveData<List<MainEntity>> = mCatalogueDao.getFavoriteShow()
+    fun getFavoriteShow(): Flow<List<MainEntity>> = mCatalogueDao.getFavoriteShow()
 
-    fun insertCatalogue(main: List<MainEntity>) = mCatalogueDao.insertCatalogue(main)
+    suspend fun insertCatalogue(main: List<MainEntity>) = mCatalogueDao.insertCatalogue(main)
 
     fun setFavorite(main: MainEntity, newState: Boolean) {
         main.isFavorite = newState
