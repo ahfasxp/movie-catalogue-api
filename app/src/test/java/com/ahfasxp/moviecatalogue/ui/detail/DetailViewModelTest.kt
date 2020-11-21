@@ -3,9 +3,10 @@ package com.ahfasxp.moviecatalogue.ui.detail
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import com.ahfasxp.moviecatalogue.data.CatalogueRepository
-import com.ahfasxp.moviecatalogue.data.source.local.entity.MainEntity
-import com.ahfasxp.moviecatalogue.utils.DataDummy
+import com.ahfasxp.moviecatalogue.core.data.CatalogueRepository
+import com.ahfasxp.moviecatalogue.core.data.source.local.entity.MainEntity
+import com.ahfasxp.moviecatalogue.core.utils.DataDummy
+import com.ahfasxp.moviecatalogue.detail.DetailViewModel
 import org.junit.Test
 
 import org.junit.Assert.*

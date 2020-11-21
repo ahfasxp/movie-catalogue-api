@@ -11,9 +11,10 @@ import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
 import androidx.test.rule.ActivityTestRule
+import com.ahfasxp.moviecatalogue.MainActivity
 import com.ahfasxp.moviecatalogue.R
-import com.ahfasxp.moviecatalogue.utils.DataDummy
-import com.ahfasxp.moviecatalogue.utils.EspressoIdlingResource
+import com.ahfasxp.moviecatalogue.core.utils.DataDummy
+import com.ahfasxp.moviecatalogue.core.utils.EspressoIdlingResource
 import org.hamcrest.core.AllOf.allOf
 import org.junit.After
 import org.junit.Before
