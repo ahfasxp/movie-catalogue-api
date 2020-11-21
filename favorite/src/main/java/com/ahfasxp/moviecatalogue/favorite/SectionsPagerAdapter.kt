@@ -3,7 +3,6 @@ package com.ahfasxp.moviecatalogue.favorite
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import com.ahfasxp.moviecatalogue.R
 import com.ahfasxp.moviecatalogue.favorite.favoriteMovie.FavoriteMovieFragment
 import com.ahfasxp.moviecatalogue.favorite.favoriteTvshow.FavoriteShowFragment
 

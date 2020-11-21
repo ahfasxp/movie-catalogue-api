@@ -5,8 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.ahfasxp.moviecatalogue.R
 import kotlinx.android.synthetic.main.fragment_favorite.*
+import org.koin.core.context.loadKoinModules
 
 class FavoriteFragment : Fragment() {
     override fun onCreateView(
@@ -20,6 +20,8 @@ class FavoriteFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         if (activity != null) {
+            loadKoinModules(viewModelModule)
+
             //Setup ViewPager
             val sectionsPagerAdapter =
                 SectionsPagerAdapter(this, childFragmentManager)

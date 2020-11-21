@@ -1,52 +1,49 @@
-package com.ahfasxp.moviecatalogue.favorite.favoriteTvshow
+package com.ahfasxp.moviecatalogue.favorite.favoriteMovie
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import com.ahfasxp.moviecatalogue.R
 import com.ahfasxp.moviecatalogue.core.ui.MainAdapter
 import com.ahfasxp.moviecatalogue.detail.DetailActivity
-import com.ahfasxp.moviecatalogue.movie.MovieViewModel
-import kotlinx.android.synthetic.main.fragment_favorite_show.*
-import kotlinx.android.synthetic.main.fragment_movie.progressBar
+import com.ahfasxp.moviecatalogue.favorite.R
+import kotlinx.android.synthetic.main.fragment_favorite_movie.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class FavoriteShowFragment : Fragment() {
+class FavoriteMovieFragment : Fragment() {
     //ViewModel
-    private val favoriteShowViewModel: FavoriteShowViewModel by viewModel()
+    private val favoriteMovieViewModel: FavoriteMovieViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_favorite_show, container, false)
+        return inflater.inflate(R.layout.fragment_favorite_movie, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         if (activity != null) {
             //Menginisialisasi RecycleView dari MainAdapter
-            val favoriteShowAdapter = MainAdapter()
+            val favoriteMovieAdapter = MainAdapter()
             progressBar.visibility = View.VISIBLE
-            favoriteShowViewModel.getFavoriteShow.observe(this, Observer { shows ->
+            favoriteMovieViewModel.getFavoriteMovie.observe(this, Observer { movies ->
                 progressBar.visibility = View.GONE
-                favoriteShowAdapter.setData(shows)
-                favoriteShowAdapter.notifyDataSetChanged()
+                favoriteMovieAdapter.setData(movies)
+                favoriteMovieAdapter.notifyDataSetChanged()
             })
 
-            with(rv_favorite_show) {
+            with(rv_favorite_movie) {
                 layoutManager = GridLayoutManager(activity, 2)
                 setHasFixedSize(true)
-                adapter = favoriteShowAdapter
+                adapter = favoriteMovieAdapter
             }
-            favoriteShowAdapter.onItemClick = { selectedData ->
+            favoriteMovieAdapter.onItemClick = { selectedData ->
                 val intent = Intent(activity, DetailActivity::class.java)
                 intent.putExtra(DetailActivity.EXTRA_DATA, selectedData)
                 startActivity(intent)
