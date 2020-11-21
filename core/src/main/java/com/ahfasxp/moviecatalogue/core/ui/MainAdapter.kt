@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.ahfasxp.moviecatalogue.R
+import com.ahfasxp.moviecatalogue.core.R
 import com.ahfasxp.moviecatalogue.core.domain.model.Catalogue
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions

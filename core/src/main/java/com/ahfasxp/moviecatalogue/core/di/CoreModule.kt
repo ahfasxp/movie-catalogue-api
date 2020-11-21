@@ -38,5 +38,11 @@ val repositoryModule = module {
     single { LocalDataSource(get()) }
     single { RemoteDataSource(get()) }
     factory { AppExecutors() }
-    single<ICatalogueRepository> { CatalogueRepository(get(), get(), get()) }
+    single<ICatalogueRepository> {
+        CatalogueRepository(
+            get(),
+            get(),
+            get()
+        )
+    }
 }
