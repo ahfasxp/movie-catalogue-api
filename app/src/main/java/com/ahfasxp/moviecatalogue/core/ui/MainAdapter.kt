@@ -40,7 +40,7 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
         fun bind(main: Catalogue) {
             with(itemView) {
                 Glide.with(itemView.context)
-                    .load(main.poster_path)
+                    .load("https://image.tmdb.org/t/p/w500${main.poster_path}")
                     .apply(
                         RequestOptions().override(350, 550).placeholder(R.drawable.ic_loading)
                             .error(R.drawable.ic_error)

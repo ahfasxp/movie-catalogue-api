@@ -1,7 +1,7 @@
 package com.ahfasxp.moviecatalogue.core.utils
 
 import com.ahfasxp.moviecatalogue.core.data.source.local.entity.MainEntity
-import com.ahfasxp.moviecatalogue.core.data.source.remote.response.MainResponse
+import com.ahfasxp.moviecatalogue.core.data.source.remote.response.MovieResponse
 import java.util.ArrayList
 
 object DataDummy {
@@ -199,11 +199,11 @@ object DataDummy {
         return tvShow
     }
 
-    fun generateRemoteDummyMovie(): List<MainResponse> {
-        val movie = ArrayList<MainResponse>()
+    fun generateRemoteDummyMovie(): List<MovieResponse> {
+        val movie = ArrayList<MovieResponse>()
 
         movie.add(
-            MainResponse(
+            MovieResponse(
                 "1",
                 "The SpongeBob Movie: Sponge on the Run",
                 "They're Not in Bikini Bottom Anymore.",
@@ -212,7 +212,7 @@ object DataDummy {
             )
         )
         movie.add(
-            MainResponse(
+            MovieResponse(
                 "2",
                 "Hard Kill",
                 "Take on a madman. Save the world.",
@@ -221,7 +221,7 @@ object DataDummy {
             )
         )
         movie.add(
-            MainResponse(
+            MovieResponse(
                 "3",
                 "Rogue City",
                 "They're Not in Bikini Bottom Anymore.",
@@ -230,7 +230,7 @@ object DataDummy {
             )
         )
         movie.add(
-            MainResponse(
+            MovieResponse(
                 "4",
                 "Roald Dahl's The Witches",
                 "They're real!.",
@@ -239,7 +239,7 @@ object DataDummy {
             )
         )
         movie.add(
-            MainResponse(
+            MovieResponse(
                 "5",
                 "2067",
                 "The fight for the future has begun.",
@@ -248,7 +248,7 @@ object DataDummy {
             )
         )
         movie.add(
-            MainResponse(
+            MovieResponse(
                 "6",
                 "Once Upon a Snowman",
                 "Every snowman starts somewhere.",
@@ -257,7 +257,7 @@ object DataDummy {
             )
         )
         movie.add(
-            MainResponse(
+            MovieResponse(
                 "7",
                 "The New Mutants",
                 "It's time to face your demons.",
@@ -266,7 +266,7 @@ object DataDummy {
             )
         )
         movie.add(
-            MainResponse(
+            MovieResponse(
                 "8",
                 "Welcome to Sudden Death",
                 "They're Not in Bikini Bottom Anymore.",
@@ -275,7 +275,7 @@ object DataDummy {
             )
         )
         movie.add(
-            MainResponse(
+            MovieResponse(
                 "9",
                 "After We Collided",
                 "Can love overcome the past?.",
@@ -284,7 +284,7 @@ object DataDummy {
             )
         )
         movie.add(
-            MainResponse(
+            MovieResponse(
                 "10",
                 "Demon Slayer: Kimetsu no Yaiba - The Movie: Mugen Train",
                 "With your blade, bring an end to the nightmare.",
@@ -296,11 +296,11 @@ object DataDummy {
         return movie
     }
 
-    fun generateRemoteDummyTvshow(): List<MainResponse> {
-        val tvShow = ArrayList<MainResponse>()
+    fun generateRemoteDummyTvshow(): List<MovieResponse> {
+        val tvShow = ArrayList<MovieResponse>()
 
         tvShow.add(
-            MainResponse(
+            MovieResponse(
                 "11",
                 "The Good Doctor",
                 "His mind is a mystery, his methods are a miracle.",
@@ -309,7 +309,7 @@ object DataDummy {
             )
         )
         tvShow.add(
-            MainResponse(
+            MovieResponse(
                 "12",
                 "The Mandalorian",
                 "Bounty hunting is a complicated profession.",
@@ -318,7 +318,7 @@ object DataDummy {
             )
         )
         tvShow.add(
-            MainResponse(
+            MovieResponse(
                 "13",
                 "Fear the Walking Dead",
                 "Every decision is life or death.",
@@ -327,7 +327,7 @@ object DataDummy {
             )
         )
         tvShow.add(
-            MainResponse(
+            MovieResponse(
                 "14",
                 "Lucifer",
                 "It's good to be bad.",
@@ -336,7 +336,7 @@ object DataDummy {
             )
         )
         tvShow.add(
-            MainResponse(
+            MovieResponse(
                 "15",
                 "His Dark Materials",
                 "One girl will change worlds.",
@@ -345,7 +345,7 @@ object DataDummy {
             )
         )
         tvShow.add(
-            MainResponse(
+            MovieResponse(
                 "16",
                 "Grey's Anatomy",
                 "The life you save may be your own.",
@@ -354,7 +354,7 @@ object DataDummy {
             )
         )
         tvShow.add(
-            MainResponse(
+            MovieResponse(
                 "17",
                 "The Boys",
                 "Never meet your heroes.",
@@ -363,7 +363,7 @@ object DataDummy {
             )
         )
         tvShow.add(
-            MainResponse(
+            MovieResponse(
                 "18",
                 "The Queen's Gambit",
                 "They're Not in Bikini Bottom Anymore.",
@@ -372,7 +372,7 @@ object DataDummy {
             )
         )
         tvShow.add(
-            MainResponse(
+            MovieResponse(
                 "19",
                 "The Walking Dead: World Beyond",
                 "The end of the world was our beginning.",
@@ -381,7 +381,7 @@ object DataDummy {
             )
         )
         tvShow.add(
-            MainResponse(
+            MovieResponse(
                 "20",
                 "The Umbrella Academy",
                 "Super. Dysfunctional. Family.",

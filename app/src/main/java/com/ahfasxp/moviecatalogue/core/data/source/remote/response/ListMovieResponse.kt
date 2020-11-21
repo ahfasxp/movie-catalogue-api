@@ -2,7 +2,7 @@ package com.ahfasxp.moviecatalogue.core.data.source.remote.response
 
 import com.google.gson.annotations.SerializedName
 
-data class ListResponse(
+data class ListMovieResponse(
     @field:SerializedName("page")
     val page: Int,
 
@@ -13,5 +13,5 @@ data class ListResponse(
     val totalPages: Int,
 
     @field:SerializedName("results")
-    val results: List<MainResponse>
+    val results: List<MovieResponse>
 )

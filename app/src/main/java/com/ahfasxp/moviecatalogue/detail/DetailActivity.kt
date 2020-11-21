@@ -41,7 +41,7 @@ class DetailActivity : AppCompatActivity() {
     private fun populateDetail(main: Catalogue?) {
         main?.let {
             Glide.with(this@DetailActivity)
-                .load(main.poster_path)
+                .load("https://image.tmdb.org/t/p/w500${main.poster_path}")
                 .apply(
                     RequestOptions().placeholder(R.drawable.ic_loading)
                         .error(R.drawable.ic_error)

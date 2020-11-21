@@ -1,7 +1,7 @@
 package com.ahfasxp.moviecatalogue.core.utils
 
 import android.content.Context
-import com.ahfasxp.moviecatalogue.core.data.source.remote.response.MainResponse
+import com.ahfasxp.moviecatalogue.core.data.source.remote.response.MovieResponse
 import org.json.JSONException
 import org.json.JSONObject
 import java.io.IOException
@@ -21,8 +21,8 @@ class JsonHelper(private val context: Context) {
         }
     }
 
-    fun loadMovies(): List<MainResponse> {
-        val list = ArrayList<MainResponse>()
+    fun loadMovies(): List<MovieResponse> {
+        val list = ArrayList<MovieResponse>()
         try {
             val responseObject = JSONObject(parsingFileToString("MovieResponses.json").toString())
             val listArray = responseObject.getJSONArray("movies")
@@ -35,7 +35,7 @@ class JsonHelper(private val context: Context) {
                 val overview = movie.getString("overview")
                 val posterPath = movie.getString("poster_path")
 
-                val movieResponse = MainResponse(id, title, tagline, overview, posterPath)
+                val movieResponse = MovieResponse(id, title, tagline, overview, posterPath)
                 list.add(movieResponse)
             }
         } catch (e: JSONException) {
@@ -45,8 +45,8 @@ class JsonHelper(private val context: Context) {
         return list
     }
 
-    fun loadShows(): List<MainResponse> {
-        val list = ArrayList<MainResponse>()
+    fun loadShows(): List<MovieResponse> {
+        val list = ArrayList<MovieResponse>()
         try {
             val responseObject = JSONObject(parsingFileToString("ShowResponses.json").toString())
             val listArray = responseObject.getJSONArray("shows")
@@ -59,7 +59,7 @@ class JsonHelper(private val context: Context) {
                 val overview = movie.getString("overview")
                 val posterPath = movie.getString("poster_path")
 
-                val showResponse = MainResponse(id, title, tagline, overview, posterPath)
+                val showResponse = MovieResponse(id, title, tagline, overview, posterPath)
                 list.add(showResponse)
             }
         } catch (e: JSONException) {

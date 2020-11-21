@@ -1,11 +1,13 @@
 package com.ahfasxp.moviecatalogue.core.data
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import com.ahfasxp.moviecatalogue.core.data.source.local.LocalDataSource
 import com.ahfasxp.moviecatalogue.core.data.source.remote.network.ApiResponse
 import com.ahfasxp.moviecatalogue.core.data.source.remote.RemoteDataSource
-import com.ahfasxp.moviecatalogue.core.data.source.remote.response.MainResponse
+import com.ahfasxp.moviecatalogue.core.data.source.remote.response.MovieResponse
+import com.ahfasxp.moviecatalogue.core.data.source.remote.response.ShowResponse
 import com.ahfasxp.moviecatalogue.core.domain.model.Catalogue
 import com.ahfasxp.moviecatalogue.core.domain.repository.ICatalogueRepository
 import com.ahfasxp.moviecatalogue.core.utils.AppExecutors
@@ -32,7 +34,7 @@ class CatalogueRepository private constructor(
     }
 
     override fun getAllMovies(): LiveData<Resource<List<Catalogue>>> =
-        object : NetworkBoundResource<List<Catalogue>, List<MainResponse>>(appExecutors) {
+        object : NetworkBoundResource<List<Catalogue>, List<MovieResponse>>(appExecutors) {
             public override fun loadFromDB(): LiveData<List<Catalogue>> {
                 return Transformations.map(localDataSource.getAllMovies()) {
                     DataMapper.mapEntitiesToDomain(it)
@@ -40,19 +42,21 @@ class CatalogueRepository private constructor(
             }
 
             override fun shouldFetch(data: List<Catalogue>?): Boolean =
-                data == null || data.isEmpty()
+//                data == null || data.isEmpty()
+                true //agar selelu mengambil data dari internet
 
-            override fun createCall(): LiveData<ApiResponse<List<MainResponse>>> =
+            override fun createCall(): LiveData<ApiResponse<List<MovieResponse>>> =
                 remoteDataSource.getAllMovies()
 
-            override fun saveCallResult(data: List<MainResponse>) {
-                val movieList = DataMapper.mapResponsesToEntities(data)
+            override fun saveCallResult(data: List<MovieResponse>) {
+                val movieList = DataMapper.mapResponsesMovieToEntities(data)
+                Log.d("cekmovie", movieList.toString())
                 localDataSource.insertCatalogue(movieList)
             }
         }.asLiveData()
 
     override fun getAllShows(): LiveData<Resource<List<Catalogue>>> =
-        object : NetworkBoundResource<List<Catalogue>, List<MainResponse>>(appExecutors) {
+        object : NetworkBoundResource<List<Catalogue>, List<ShowResponse>>(appExecutors) {
             public override fun loadFromDB(): LiveData<List<Catalogue>> {
                 return Transformations.map(localDataSource.getAllShows()) {
                     DataMapper.mapEntitiesToDomain(it)
@@ -62,11 +66,11 @@ class CatalogueRepository private constructor(
             override fun shouldFetch(data: List<Catalogue>?): Boolean =
                 data == null || data.isEmpty()
 
-            override fun createCall(): LiveData<ApiResponse<List<MainResponse>>> =
+            override fun createCall(): LiveData<ApiResponse<List<ShowResponse>>> =
                 remoteDataSource.getAllShows()
 
-            override fun saveCallResult(data: List<MainResponse>) {
-                val showList = DataMapper.mapResponsesToEntities(data)
+            override fun saveCallResult(data: List<ShowResponse>) {
+                val showList = DataMapper.mapResponsesShowToEntities(data)
                 localDataSource.insertCatalogue(showList)
             }
         }.asLiveData()

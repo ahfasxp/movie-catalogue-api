@@ -1,11 +1,12 @@
 package com.ahfasxp.moviecatalogue.core.utils
 
 import com.ahfasxp.moviecatalogue.core.data.source.local.entity.MainEntity
-import com.ahfasxp.moviecatalogue.core.data.source.remote.response.MainResponse
+import com.ahfasxp.moviecatalogue.core.data.source.remote.response.MovieResponse
+import com.ahfasxp.moviecatalogue.core.data.source.remote.response.ShowResponse
 import com.ahfasxp.moviecatalogue.core.domain.model.Catalogue
 
 object DataMapper {
-    fun mapResponsesToEntities(input: List<MainResponse>): List<MainEntity> {
+    fun mapResponsesMovieToEntities(input: List<MovieResponse>): List<MainEntity> {
         val mainList = ArrayList<MainEntity>()
         input.map {
             val main = MainEntity(
@@ -15,7 +16,24 @@ object DataMapper {
                 overview = it.overview,
                 poster_path = it.poster_path,
                 isFavorite = false,
-                type = null
+                type = "movie"
+            )
+            mainList.add(main)
+        }
+        return mainList
+    }
+
+    fun mapResponsesShowToEntities(input: List<ShowResponse>): List<MainEntity> {
+        val mainList = ArrayList<MainEntity>()
+        input.map {
+            val main = MainEntity(
+                id = it.id,
+                title = it.title,
+                tagline = it.tagline,
+                overview = it.overview,
+                poster_path = it.poster_path,
+                isFavorite = false,
+                type = "show"
             )
             mainList.add(main)
         }

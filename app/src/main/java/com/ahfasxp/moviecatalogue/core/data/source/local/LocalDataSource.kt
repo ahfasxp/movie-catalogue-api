@@ -17,10 +17,6 @@ class LocalDataSource private constructor(private val mCatalogueDao: CatalogueDa
 
     fun getAllShows(): LiveData<List<MainEntity>> = mCatalogueDao.getShows()
 
-    fun getDetailMovie(id: String): LiveData<MainEntity> = mCatalogueDao.getDetailMovie(id)
-
-    fun getDetailShow(id: String): LiveData<MainEntity> = mCatalogueDao.getDetailShow(id)
-
     fun getFavoriteMovie(): LiveData<List<MainEntity>> = mCatalogueDao.getFavoriteMovie()
 
     fun getFavoriteShow(): LiveData<List<MainEntity>> = mCatalogueDao.getFavoriteShow()
