@@ -8,15 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.ahfasxp.moviecatalogue.R
 import com.ahfasxp.moviecatalogue.detail.DetailActivity
 import com.ahfasxp.moviecatalogue.core.ui.MainAdapter
-import com.ahfasxp.moviecatalogue.core.ui.ViewModelFactory
-import com.ahfasxp.moviecatalogue.core.vo.Resource
-import com.ahfasxp.moviecatalogue.core.vo.Status
+import com.ahfasxp.moviecatalogue.core.data.Resource
 import kotlinx.android.synthetic.main.fragment_movie.*
+import org.koin.android.viewmodel.ext.android.viewModel
 
 /**
  * A simple [Fragment] subclass.
@@ -24,6 +22,9 @@ import kotlinx.android.synthetic.main.fragment_movie.*
  * create an instance of this fragment.
  */
 class MovieFragment : Fragment() {
+    //VIewModel
+    private val movieViewModel: MovieViewModel by viewModel()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -35,10 +36,6 @@ class MovieFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         if (activity != null) {
-            //ViewModel
-            val factory = ViewModelFactory.getInstance(requireActivity())
-            val movieViewModel = ViewModelProvider(this, factory)[MovieViewModel::class.java]
-
             //Menginisialisasi RecycleView dari MainAdapter
             val movieAdapter = MainAdapter()
             progressBar.visibility = View.VISIBLE

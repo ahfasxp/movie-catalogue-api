@@ -5,15 +5,7 @@ import com.ahfasxp.moviecatalogue.core.data.source.local.entity.MainEntity
 import com.ahfasxp.moviecatalogue.core.data.source.local.room.CatalogueDao
 import kotlinx.coroutines.flow.Flow
 
-class LocalDataSource private constructor(private val mCatalogueDao: CatalogueDao) {
-
-    companion object {
-        private var INSTANCE: LocalDataSource? = null
-
-        fun getInstance(catalogueDao: CatalogueDao): LocalDataSource =
-            INSTANCE ?: LocalDataSource(catalogueDao)
-    }
-
+class LocalDataSource(private val mCatalogueDao: CatalogueDao) {
     fun getAllMovies(): Flow<List<MainEntity>> = mCatalogueDao.getMovies()
 
     fun getAllShows(): Flow<List<MainEntity>> = mCatalogueDao.getShows()

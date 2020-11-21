@@ -1,9 +1,7 @@
 package com.ahfasxp.moviecatalogue.core.domain.usecase
 
-import androidx.lifecycle.LiveData
 import com.ahfasxp.moviecatalogue.core.domain.model.Catalogue
 import com.ahfasxp.moviecatalogue.core.domain.repository.ICatalogueRepository
-import com.ahfasxp.moviecatalogue.core.vo.Resource
 
 class CatalogueInteractor(private val catalogueRepository: ICatalogueRepository) :
     CatalogueUseCase {

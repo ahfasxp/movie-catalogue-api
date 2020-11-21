@@ -8,16 +8,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.ahfasxp.moviecatalogue.R
 import com.ahfasxp.moviecatalogue.detail.DetailActivity
 import com.ahfasxp.moviecatalogue.core.ui.MainAdapter
-import com.ahfasxp.moviecatalogue.core.ui.ViewModelFactory
-import com.ahfasxp.moviecatalogue.core.vo.Resource
-import com.ahfasxp.moviecatalogue.core.vo.Status
+import com.ahfasxp.moviecatalogue.core.data.Resource
+import com.ahfasxp.moviecatalogue.movie.MovieViewModel
 import kotlinx.android.synthetic.main.fragment_show.*
 import kotlinx.android.synthetic.main.fragment_show.progressBar
+import org.koin.android.viewmodel.ext.android.viewModel
 
 /**
  * A simple [Fragment] subclass.
@@ -25,6 +24,9 @@ import kotlinx.android.synthetic.main.fragment_show.progressBar
  * create an instance of this fragment.
  */
 class ShowFragment : Fragment() {
+    //ViewModel
+    private val showViewModel: ShowViewModel by viewModel()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -36,10 +38,6 @@ class ShowFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         if (activity != null) {
-            //ViewModel
-            val factory = ViewModelFactory.getInstance(requireActivity())
-            val showViewModel = ViewModelProvider(this, factory)[ShowViewModel::class.java]
-
             //Menginisialisasi RecycleView dari MainAdapter
             val showAdapter = MainAdapter()
             progressBar.visibility = View.VISIBLE

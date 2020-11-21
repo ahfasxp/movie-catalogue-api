@@ -1,10 +1,6 @@
 package com.ahfasxp.moviecatalogue.core.data
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MediatorLiveData
 import com.ahfasxp.moviecatalogue.core.data.source.remote.network.ApiResponse
-import com.ahfasxp.moviecatalogue.core.utils.AppExecutors
-import com.ahfasxp.moviecatalogue.core.vo.Resource
 import kotlinx.coroutines.flow.*
 
 abstract class NetworkBoundResource<ResultType, RequestType> {

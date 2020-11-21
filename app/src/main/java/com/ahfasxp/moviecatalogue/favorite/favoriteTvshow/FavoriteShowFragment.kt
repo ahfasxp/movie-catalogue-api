@@ -11,12 +11,16 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.ahfasxp.moviecatalogue.R
 import com.ahfasxp.moviecatalogue.core.ui.MainAdapter
-import com.ahfasxp.moviecatalogue.core.ui.ViewModelFactory
 import com.ahfasxp.moviecatalogue.detail.DetailActivity
+import com.ahfasxp.moviecatalogue.movie.MovieViewModel
 import kotlinx.android.synthetic.main.fragment_favorite_show.*
 import kotlinx.android.synthetic.main.fragment_movie.progressBar
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class FavoriteShowFragment : Fragment() {
+    //ViewModel
+    private val favoriteShowViewModel: FavoriteShowViewModel by viewModel()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -28,10 +32,6 @@ class FavoriteShowFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         if (activity != null) {
-            val factory = ViewModelFactory.getInstance(requireActivity())
-            val favoriteShowViewModel =
-                ViewModelProvider(this, factory)[FavoriteShowViewModel::class.java]
-
             //Menginisialisasi RecycleView dari MainAdapter
             val favoriteShowAdapter = MainAdapter()
             progressBar.visibility = View.VISIBLE

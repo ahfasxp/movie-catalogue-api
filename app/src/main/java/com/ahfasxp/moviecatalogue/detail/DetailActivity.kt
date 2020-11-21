@@ -1,37 +1,28 @@
 package com.ahfasxp.moviecatalogue.detail
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.ahfasxp.moviecatalogue.R
-import com.ahfasxp.moviecatalogue.core.data.source.local.entity.MainEntity
 import com.ahfasxp.moviecatalogue.core.domain.model.Catalogue
-import com.ahfasxp.moviecatalogue.core.ui.ViewModelFactory
-import com.ahfasxp.moviecatalogue.core.vo.Status
+import com.ahfasxp.moviecatalogue.movie.MovieViewModel
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.activity_detail.*
-import kotlinx.android.synthetic.main.activity_detail.progressBar
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class DetailActivity : AppCompatActivity() {
-    private lateinit var detailViewModel: DetailViewModel
+    private val detailViewModel: DetailViewModel by viewModel()
 
     companion object {
-        //        const val EXTRA_ID = "extra_id"
-//        const val EXTRA_TYPE = "extra_type"
         const val EXTRA_DATA = "extra_data"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
-        //ViewModel
-        val factory = ViewModelFactory.getInstance(this)
-        detailViewModel = ViewModelProvider(this, factory)[DetailViewModel::class.java]
 
         val detail = intent.getParcelableExtra<Catalogue>(EXTRA_DATA)
         progressBar.visibility = View.VISIBLE

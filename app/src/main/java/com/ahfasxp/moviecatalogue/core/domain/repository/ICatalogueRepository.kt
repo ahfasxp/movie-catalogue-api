@@ -1,9 +1,7 @@
 package com.ahfasxp.moviecatalogue.core.domain.repository
 
-import androidx.lifecycle.LiveData
-import com.ahfasxp.moviecatalogue.core.data.source.local.entity.MainEntity
 import com.ahfasxp.moviecatalogue.core.domain.model.Catalogue
-import com.ahfasxp.moviecatalogue.core.vo.Resource
+import com.ahfasxp.moviecatalogue.core.data.Resource
 import kotlinx.coroutines.flow.Flow
 
 interface ICatalogueRepository {

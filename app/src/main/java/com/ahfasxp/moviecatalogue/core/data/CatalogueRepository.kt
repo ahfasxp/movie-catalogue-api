@@ -1,8 +1,6 @@
 package com.ahfasxp.moviecatalogue.core.data
 
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Transformations
 import com.ahfasxp.moviecatalogue.core.data.source.local.LocalDataSource
 import com.ahfasxp.moviecatalogue.core.data.source.remote.network.ApiResponse
 import com.ahfasxp.moviecatalogue.core.data.source.remote.RemoteDataSource
@@ -12,29 +10,13 @@ import com.ahfasxp.moviecatalogue.core.domain.model.Catalogue
 import com.ahfasxp.moviecatalogue.core.domain.repository.ICatalogueRepository
 import com.ahfasxp.moviecatalogue.core.utils.AppExecutors
 import com.ahfasxp.moviecatalogue.core.utils.DataMapper
-import com.ahfasxp.moviecatalogue.core.vo.Resource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-class CatalogueRepository private constructor(
+class CatalogueRepository(
     private val remoteDataSource: RemoteDataSource, private val localDataSource: LocalDataSource,
     private val appExecutors: AppExecutors
 ) : ICatalogueRepository {
-
-    companion object {
-        @Volatile
-        private var instance: CatalogueRepository? = null
-
-        fun getInstance(
-            remoteData: RemoteDataSource,
-            localData: LocalDataSource,
-            appExecutors: AppExecutors
-        ): CatalogueRepository =
-            instance ?: synchronized(this) {
-                instance ?: CatalogueRepository(remoteData, localData, appExecutors)
-            }
-    }
-
     override fun getAllMovies(): Flow<Resource<List<Catalogue>>> =
         object : NetworkBoundResource<List<Catalogue>, List<MovieResponse>>() {
             public override fun loadFromDB(): Flow<List<Catalogue>> {
