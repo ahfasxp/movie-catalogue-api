@@ -1,6 +1,5 @@
 package com.ahfasxp.moviecatalogue.core.data.source.local
 
-import androidx.lifecycle.LiveData
 import com.ahfasxp.moviecatalogue.core.data.source.local.entity.MainEntity
 import com.ahfasxp.moviecatalogue.core.data.source.local.room.CatalogueDao
 import kotlinx.coroutines.flow.Flow

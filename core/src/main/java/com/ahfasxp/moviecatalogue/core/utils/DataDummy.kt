@@ -2,7 +2,7 @@ package com.ahfasxp.moviecatalogue.core.utils
 
 import com.ahfasxp.moviecatalogue.core.data.source.local.entity.MainEntity
 import com.ahfasxp.moviecatalogue.core.data.source.remote.response.MovieResponse
-import java.util.ArrayList
+import java.util.*
 
 object DataDummy {
     fun generateDummyMovie(): ArrayList<MainEntity> {

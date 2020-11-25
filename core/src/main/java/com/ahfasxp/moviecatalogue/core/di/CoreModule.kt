@@ -8,7 +8,6 @@ import com.ahfasxp.moviecatalogue.core.data.source.remote.RemoteDataSource
 import com.ahfasxp.moviecatalogue.core.data.source.remote.network.ApiService
 import com.ahfasxp.moviecatalogue.core.domain.repository.ICatalogueRepository
 import com.ahfasxp.moviecatalogue.core.utils.AppExecutors
-import okhttp3.OkHttpClient
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 import retrofit2.Retrofit

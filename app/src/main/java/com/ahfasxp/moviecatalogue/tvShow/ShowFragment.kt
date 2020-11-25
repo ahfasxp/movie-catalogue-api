@@ -2,20 +2,18 @@ package com.ahfasxp.moviecatalogue.tvShow
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import com.ahfasxp.moviecatalogue.R
-import com.ahfasxp.moviecatalogue.detail.DetailActivity
-import com.ahfasxp.moviecatalogue.core.ui.MainAdapter
 import com.ahfasxp.moviecatalogue.core.data.Resource
-import com.ahfasxp.moviecatalogue.movie.MovieViewModel
+import com.ahfasxp.moviecatalogue.core.ui.MainAdapter
+import com.ahfasxp.moviecatalogue.detail.DetailActivity
 import kotlinx.android.synthetic.main.fragment_show.*
-import kotlinx.android.synthetic.main.fragment_show.progressBar
 import org.koin.android.viewmodel.ext.android.viewModel
 
 /**

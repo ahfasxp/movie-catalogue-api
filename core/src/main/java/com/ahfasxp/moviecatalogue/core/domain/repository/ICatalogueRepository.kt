@@ -1,7 +1,7 @@
 package com.ahfasxp.moviecatalogue.core.domain.repository
 
-import com.ahfasxp.moviecatalogue.core.domain.model.Catalogue
 import com.ahfasxp.moviecatalogue.core.data.Resource
+import com.ahfasxp.moviecatalogue.core.domain.model.Catalogue
 import kotlinx.coroutines.flow.Flow
 
 interface ICatalogueRepository {

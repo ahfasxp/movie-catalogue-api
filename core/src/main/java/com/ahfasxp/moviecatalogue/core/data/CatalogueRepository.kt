@@ -2,8 +2,8 @@ package com.ahfasxp.moviecatalogue.core.data
 
 import android.util.Log
 import com.ahfasxp.moviecatalogue.core.data.source.local.LocalDataSource
-import com.ahfasxp.moviecatalogue.core.data.source.remote.network.ApiResponse
 import com.ahfasxp.moviecatalogue.core.data.source.remote.RemoteDataSource
+import com.ahfasxp.moviecatalogue.core.data.source.remote.network.ApiResponse
 import com.ahfasxp.moviecatalogue.core.data.source.remote.response.MovieResponse
 import com.ahfasxp.moviecatalogue.core.data.source.remote.response.ShowResponse
 import com.ahfasxp.moviecatalogue.core.domain.model.Catalogue

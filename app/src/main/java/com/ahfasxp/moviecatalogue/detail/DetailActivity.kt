@@ -4,10 +4,8 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.ViewModelProvider
 import com.ahfasxp.moviecatalogue.R
 import com.ahfasxp.moviecatalogue.core.domain.model.Catalogue
-import com.ahfasxp.moviecatalogue.movie.MovieViewModel
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.activity_detail.*
