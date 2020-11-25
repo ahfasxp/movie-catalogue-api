@@ -6,10 +6,6 @@ plugins {
 }
 apply from: '../shared_dependencies.gradle'
 
-androidExtensions {
-    experimental = true
-}
-
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.2"
@@ -20,16 +16,23 @@ android {
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+        debug {
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -37,11 +40,19 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+    dataBinding {
+        enabled = true
+    }
+
+    androidExtensions {
+        experimental = true
+    }
+
     dynamicFeatures = [':favorite']
 }
 
 dependencies {
-
     //Testing
     testImplementation "junit:junit:$junit_version"
     testImplementation "org.mockito:mockito-core:$mockito_core_version"
@@ -54,12 +65,8 @@ dependencies {
     androidTestImplementation "androidx.test:rules:$rules_version"
     androidTestImplementation "androidx.test:runner:$runner_version"
     implementation "androidx.test.espresso:espresso-idling-resource:$espresso_version"
-
     //Leak Canary
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.4'
-
-    //ViewModel
-    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_extensions_version"
 
     implementation project(":core")
 }

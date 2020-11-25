@@ -16,11 +16,6 @@ import com.ahfasxp.moviecatalogue.detail.DetailActivity
 import kotlinx.android.synthetic.main.fragment_movie.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
-/**
- * A simple [Fragment] subclass.
- * Use the [MovieFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class MovieFragment : Fragment() {
     //VIewModel
     private val movieViewModel: MovieViewModel by viewModel()
@@ -58,7 +53,7 @@ class MovieFragment : Fragment() {
 
             with(rv_movie) {
                 layoutManager = GridLayoutManager(activity, 2)
-//                setHasFixedSize(true)
+                setHasFixedSize(true)
                 adapter = movieAdapter
             }
             movieAdapter.onItemClick = { selectedData ->

@@ -16,11 +16,6 @@ import com.ahfasxp.moviecatalogue.detail.DetailActivity
 import kotlinx.android.synthetic.main.fragment_show.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
-/**
- * A simple [Fragment] subclass.
- * Use the [ShowFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class ShowFragment : Fragment() {
     //ViewModel
     private val showViewModel: ShowViewModel by viewModel()
