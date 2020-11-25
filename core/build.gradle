@@ -45,7 +45,7 @@ android {
         enable 'RtlHardcoded','RtlCompat', 'RtlEnabled'
         // Untuk memeriksa Issue ID tertentu saja, yang lainnya akan dihiraukan
         // Ia akan menghiraukan kode enable dan disable yang sebelumnya
-        check 'NewApi', 'InlinedApi'
+        checkOnly 'NewApi', 'InlinedApi'
         // Jika true, report hasil lint akan dinonaktifkan
         quiet true
         // Jika true (default), proses build akan dihentikan jika ada eror.
