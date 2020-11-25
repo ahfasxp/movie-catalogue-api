@@ -41,12 +41,16 @@ android {
         jvmTarget = '1.8'
     }
 
-    dataBinding {
-        enabled = true
-    }
-
     androidExtensions {
         experimental = true
+    }
+
+    buildFeatures {
+        dataBinding = true
+    }
+
+    lintOptions {
+        abortOnError false
     }
 
     dynamicFeatures = [':favorite']

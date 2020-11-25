@@ -13,5 +13,5 @@ interface ICatalogueRepository {
 
     fun getFavoriteShow(): Flow<List<Catalogue>>
 
-    fun setFavorite(main: Catalogue, state: Boolean)
+    fun setFavorite(catalogue: Catalogue, state: Boolean)
 }
