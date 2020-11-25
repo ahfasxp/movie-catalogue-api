@@ -22,6 +22,13 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments += [
+                        "room.incremental":"true"]
+            }
+        }
     }
 
     buildTypes {
@@ -36,22 +43,6 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
-    }
-
-    lintOptions {
-        // Menonaktikan Issue ID yang disebutkan.
-        disable 'TypographyFractions','TypographyQuotes'
-        // Mengkatifkan Issue ID yang disebutkan.
-        enable 'RtlHardcoded','RtlCompat', 'RtlEnabled'
-        // Untuk memeriksa Issue ID tertentu saja, yang lainnya akan dihiraukan
-        // Ia akan menghiraukan kode enable dan disable yang sebelumnya
-        checkOnly 'NewApi', 'InlinedApi'
-        // Jika true, report hasil lint akan dinonaktifkan
-        quiet true
-        // Jika true (default), proses build akan dihentikan jika ada eror.
-        abortOnError false
-        // Jika true, hanya memberikan report eror.
-        ignoreWarnings true
     }
 }
 
