@@ -69,8 +69,6 @@ dependencies {
     androidTestImplementation "androidx.test:rules:$rules_version"
     androidTestImplementation "androidx.test:runner:$runner_version"
     implementation "androidx.test.espresso:espresso-idling-resource:$espresso_version"
-    //Leak Canary
-    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.4'
 
     implementation project(":core")
 }
