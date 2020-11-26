@@ -32,7 +32,7 @@ class FavoriteShowFragment : Fragment() {
             //Menginisialisasi RecycleView dari MainAdapter
             val favoriteShowAdapter = MainAdapter()
             progressBar.visibility = View.VISIBLE
-            favoriteShowViewModel.getFavoriteShow.observe(this, Observer { shows ->
+            favoriteShowViewModel.getFavoriteShow.observe(viewLifecycleOwner, Observer { shows ->
                 progressBar.visibility = View.GONE
                 favoriteShowAdapter.setData(shows)
                 favoriteShowAdapter.notifyDataSetChanged()

@@ -32,7 +32,7 @@ class FavoriteMovieFragment : Fragment() {
             //Menginisialisasi RecycleView dari MainAdapter
             val favoriteMovieAdapter = MainAdapter()
             progressBar.visibility = View.VISIBLE
-            favoriteMovieViewModel.getFavoriteMovie.observe(this, Observer { movies ->
+            favoriteMovieViewModel.getFavoriteMovie.observe(viewLifecycleOwner, Observer { movies ->
                 progressBar.visibility = View.GONE
                 favoriteMovieAdapter.setData(movies)
                 favoriteMovieAdapter.notifyDataSetChanged()
