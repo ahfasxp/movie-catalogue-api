@@ -147,17 +147,17 @@ class MainActivityTest {
             .check(ViewAssertions.matches(withText(dummyShow[0].overview)))
     }
 
-    @Test
-    fun loadFavorite() {
-        //Klik BottomNavigation dengan teks favorite
-        Espresso.onView(AllOf.allOf(ViewMatchers.withText("Favorite"), ViewMatchers.isDisplayed()))
-            .perform(ViewActions.click())
-        //Memastikan rv_favorite_movie dalam keadaan tampil
-        Espresso.onView(AllOf.allOf(withId(R.id.rv_favorite_movie), ViewMatchers.isDisplayed()))
-        //Klik TabLayput dengan text tvshow
-        Espresso.onView(AllOf.allOf(ViewMatchers.withText("TV SHOW"), ViewMatchers.isDisplayed()))
-            .perform(ViewActions.click())
-        //Memastikan rv_favorite_show dalam keadaan tampil
-        Espresso.onView(AllOf.allOf(withId(R.id.rv_favorite_show), ViewMatchers.isDisplayed()))
-    }
+//    @Test
+//    fun loadFavorite() {
+//        //Klik BottomNavigation dengan teks favorite
+//        Espresso.onView(AllOf.allOf(ViewMatchers.withText("Favorite"), ViewMatchers.isDisplayed()))
+//            .perform(ViewActions.click())
+//        //Memastikan rv_favorite_movie dalam keadaan tampil
+//        Espresso.onView(AllOf.allOf(withId(R.id.rv_favorite_movie), ViewMatchers.isDisplayed()))
+//        //Klik TabLayput dengan text tvshow
+//        Espresso.onView(AllOf.allOf(ViewMatchers.withText("TV SHOW"), ViewMatchers.isDisplayed()))
+//            .perform(ViewActions.click())
+//        //Memastikan rv_favorite_show dalam keadaan tampil
+//        Espresso.onView(AllOf.allOf(withId(R.id.rv_favorite_show), ViewMatchers.isDisplayed()))
+//    }
 }
