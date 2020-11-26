@@ -34,7 +34,7 @@ class MovieFragment : Fragment() {
             //Menginisialisasi RecycleView dari MainAdapter
             val movieAdapter = MainAdapter()
             progressBar.visibility = View.VISIBLE
-            movieViewModel.getMovies.observe(this, Observer { movies ->
+            movieViewModel.getMovies.observe(viewLifecycleOwner, Observer { movies ->
                 if (movies != null) {
                     when (movies) {
                         is Resource.Loading -> progressBar.visibility = View.VISIBLE

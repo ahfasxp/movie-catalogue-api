@@ -34,7 +34,7 @@ class ShowFragment : Fragment() {
             //Menginisialisasi RecycleView dari MainAdapter
             val showAdapter = MainAdapter()
             progressBar.visibility = View.VISIBLE
-            showViewModel.getTvshow.observe(this, Observer { shows ->
+            showViewModel.getTvshow.observe(viewLifecycleOwner, Observer { shows ->
                 if (shows != null) {
                     when (shows) {
                         is Resource.Loading -> progressBar.visibility = View.VISIBLE
