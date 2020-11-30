@@ -7,7 +7,6 @@ import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers
-import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
 import androidx.test.rule.ActivityTestRule
@@ -56,11 +55,11 @@ class MainActivityTest {
         //Memberi tindakan klik pada data pertama di rv_movie
         Espresso.onView(AllOf.allOf(ViewMatchers.withId(R.id.rv_movie), ViewMatchers.isDisplayed()))
             .perform(
-            RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
-                0,
-                ViewActions.click()
+                RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
+                    0,
+                    ViewActions.click()
+                )
             )
-        )
         //Memastikan ImageVIew tampil sesuai yang diharapkan
         Espresso.onView(
             AllOf.allOf(
@@ -112,12 +111,13 @@ class MainActivityTest {
         Espresso.onView(AllOf.allOf(ViewMatchers.withText("TV Show"), ViewMatchers.isDisplayed()))
             .perform(ViewActions.click())
         //Memberi tindakan klik pada data pertama di rv_movie
-        Espresso.onView(AllOf.allOf(ViewMatchers.withId(R.id.rv_show), ViewMatchers.isDisplayed())).perform(
-            RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
-                0,
-                ViewActions.click()
+        Espresso.onView(AllOf.allOf(ViewMatchers.withId(R.id.rv_show), ViewMatchers.isDisplayed()))
+            .perform(
+                RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
+                    0,
+                    ViewActions.click()
+                )
             )
-        )
         //Memastikan ImageVIew tampil sesuai yang diharapkan
         Espresso.onView(
             AllOf.allOf(
